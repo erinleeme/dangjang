@@ -1,0 +1,22 @@
+.eventList{
+    width: 1050px;
+    height: 100%;
+    margin: 0 auto;
+    margin-top: 20px;
+    /*border: 1px green solid;*/
+}
+.category_event ul li{
+    padding-bottom: 15px;
+}
+.category_event ul li a{
+    display: block;
+    overflow: hidden;
+    position: relative;
+}
+
+.category_event ul li a img{
+    width: 1050px;
+    height: 200px;
+    /*border: 1px green solid;*/
+    object-fit: cover;
+}

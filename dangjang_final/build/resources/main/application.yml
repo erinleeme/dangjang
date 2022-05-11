@@ -1,0 +1,90 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/dangjang?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    username: dangjang
+    password: dangjang
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    properties:
+      hibernate:
+        default_batch_fetch_size: 1000
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        #        show_sql: true system.out으로 찍힘
+        format_sql: true
+  #  message:
+  #    basename: messages, ValidationMessages, PropertyNames
+  #    cache-duration: -1
+  #    encoding: UTF-8
+
+  # 기본적으로 jsp
+  mvc:
+    view:
+      prefix: /WEB-INF/
+      suffix: .jsp
+  #    static-path-pattern: /resources/** 이거 쓰면 망함
+  # 혹시몰라서 타임리프
+  thymeleaf:
+    view-names: thymeleaf/*
+    prefix: classpath:/templates/
+    suffix: .html
+    cache: false
+    check-template-location: true
+
+  #    운영할 때는 true
+
+  # 이미지 저장 경로로
+  servlet:
+    multipart:
+      enabled: true
+      #      location: C:\\upload
+      max-request-size: 30MB
+      max-file-size: 10MB
+
+# mybatis
+mybatis:
+  config-location: classpath:mybatis-config.xml
+  type-aliases-package: com.dangjang.mapper
+  mapper-locations: classpath:mapper/**/*.xml
+
+devtools:
+  remote:
+    restart:
+      enabled: true
+  livereload:
+    enabled: true
+
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+    org.hibernate.type: trace
+
+#decorator:
+#  datasource:
+#    datasource-proxy:
+#      query:
+#        enable-logging: true
+#        multiline: true
+#        logging: slf4j
+#        log-file: spy-log
+
+server:
+  address: localhost
+  port: 8090
+  tomcat:
+    url-encoding: UTF-8
+  servlet:
+    jsp:
+      init-parameters:
+        development: true
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+#  servlet:
+#    context-path: /dangjang
+
+#file.dir: D:/dangjangproject/dangjang

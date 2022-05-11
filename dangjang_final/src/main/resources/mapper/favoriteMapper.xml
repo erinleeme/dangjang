@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dangjang.mapper.FavoriteMapper">
+    <!--로그인시 해당유저의 찜 상품 총 수량-->
+    <select id="getUserFavoriteTotalCount" parameterType="long" resultType="int">
+        select count(*) from favorite where seq_member = #{memId}
+    </select>
+    <!-- 찜 리스트 -->
+    <select id="getFavoriteList" resultType="favorite" parameterType="java.util.Map">
+        <![CDATA[
+        select * from
+            (select @rownum := @rownum + 1 as num, tt.* from
+                (select * from dangjang.favorite join (select @rownum := 0)rn  where seq_member = #{memberId} order by create_date desc)
+                tt)t
+        where num >= #{startPage} and num <= #{endPage}
+        ]]>
+    </select>
+</mapper>

@@ -1,0 +1,595 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dangjang.mapper.ProductMapper">
+    <select id="getTotalProductRecords" resultType="int" parameterType="java.lang.String">
+        select count(*) from product p inner join
+        (select b.seq_basic_product as bsbp from basic_product b inner join
+        (select * from middle_category where code_name = #{categoryCode}
+        <if test="subCategoryNum != 'null'">
+            and id = ${subCategoryNum}
+        </if>
+        ) m
+        on b.seq_middle_category = m.id )a on p.seq_basic_product = a.bsbp
+    </select>
+
+    <select id="getTotalSearchRecords" resultType="Integer" parameterType="java.lang.String">
+        select count(*)
+        from product
+        where name like concat('%', #{keyword}, '%')
+    </select>
+
+    <!-- /////////////////////////////////////////////////////////////////////////////////// -->
+    <!--신상품 리스트 정렬 유형: 추천순 (리뷰 많은 순서인데, 랜덤으로 돌리자!) -->
+    <select id="suggestionNewProList" parameterType="java.util.Map" resultType="product">
+        <![CDATA[
+        select *
+        from (select @rownum := @rownum + 1 as num, tt.*
+              from
+                  (select * from dangjang.product join (select @rownum := 0) rn where DATEDIFF(now(), create_date) < #{date} order by rand())
+                  tt) t
+        where num >= #{startPage}
+          and num <= #{endPage}
+        ]]>
+    </select>
+
+    <!--신상품 리스트 정렬 유형: 신상품순-->
+    <select id="newProductList" parameterType="java.util.Map" resultType="product">
+        <![CDATA[
+        select *
+        from (select @rownum := @rownum + 1 as num, tt.*
+              from
+                  (select * from dangjang.product join (select @rownum := 0) rn where DATEDIFF(now(), create_date) < #{date} order by create_date DESC)
+                  tt) t
+        where num >= #{startPage}
+          and num <= #{endPage}
+        ]]>
+    </select>
+
+    <!--신상품 리스트 정렬 유형: 베스트순-->
+    <select id="bestNewProductList" parameterType="java.util.Map" resultType="product">
+        <![CDATA[
+        select *
+        from (select @rownum := @rownum + 1 as num, tt.*
+              from
+                  (select * from dangjang.product join (select @rownum := 0) rn where DATEDIFF(now(), create_date) < #{date}) tt
+                  inner join sellCount s
+              on tt.seq_product = s.seq_product
+              order by s.selling_count desc
+             ) t
+        where num >= #{startPage}
+          and num <= #{endPage}
+        ]]>
+    </select>
+
+    <!--신상품 리스트 정렬 유형: 필터 가격순-->
+    <select id="orderByPriceNewPro" parameterType="java.util.Map" resultType="product">
+        select * from
+        (select @rownum := @rownum + 1 as num, tt.* from
+        <![CDATA[
+        (select * from dangjang.product join(select @rownum := 0) rn where DATEDIFF(now(), create_date) < #{date}
+        ]]>
+        <if test='listType == "high"'>
+            order by price desc)
+        </if>
+        <if test='listType == "low"'>
+            order by price)
+        </if>
+        tt)t
+        <![CDATA[
+        where num >= #{startPage} and num <= #{endPage}
+        ]]>
+    </select>
+
+    <!-- /////////////////////////////////////////////////////////////////////////////////// -->
+    <!--메인: 신상품 10개-->
+    <select id="newProduct10List" resultType="product">
+        <![CDATA[
+        select *
+        from product
+        where DATEDIFF(now(), create_date) < 15
+        order by rand() limit 10
+        ]]>
+    </select>
+
+    <!--메인: 베스트 2개-->
+    <select id="getBestProduct2" resultType="product">
+        select *
+        from product a
+                 inner join
+             (select seq_product
+              from sellCount
+              order by selling_count desc limit 2) b
+             on a.seq_product = b.seq_product
+    </select>
+
+    <!--메인: 상품 10개-->
+    <select id="getProduct10" parameterType="java.lang.String" resultType="product">
+        select *
+        from product p
+                 inner join(select b.seq_basic_product as bsbp, m.code_name
+                            from basic_product b
+                                     inner join(select * from middle_category) m on b.seq_middle_category = m.id
+                            where m.code_name = #{category}) a
+                           on p.seq_basic_product = a.bsbp limit 10
+    </select>
+
+    <!-- /////////////////////////////////////////////////////////////////////////////////// -->
+    <!--검색-->
+    <select id="search" parameterType="java.lang.String" resultType="product">
+        select *
+        from product
+        where name like CONCAT('%', #{keyword}, '%')
+    </select>
+
+    <!-- 검색 상품 리스트: 추천순 -->
+    <select id="suggestionSearchList" parameterType="java.util.Map" resultType="product">
+        select *
+        from (select @rownum := @rownum + 1 as num, tt.*
+              from
+                  (select * from product join (select @rownum := 0) rn where name like CONCAT('%', #{keyword}, '%') order by rand()
+                  ) tt) t
+        <![CDATA[
+        where num >= #{startPage}
+          and num <= #{endPage}
+        ]]>
+    </select>
+    <!-- 검색 상품 리스트: 최신순 -->
+    <select id="latelySearchList" parameterType="java.util.Map" resultType="product">
+        select *
+        from (select @rownum := @rownum + 1 as num, tt.*
+              from
+                  (select * from product join (select @rownum := 0) rn where
+        <![CDATA[
+        DATEDIFF(now(), create_date) < #{date}
+        ]]>
+        and name like CONCAT('%', #{keyword}, '%')
+                  order by create_date desc
+                  ) tt) t
+        <![CDATA[
+        where num >= #{startPage}
+          and num <= #{endPage}
+        ]]>
+    </select>
+    <!-- 검색 상품 리스트: 베스트 순 -->
+    <select id="bestSearchList" parameterType="java.util.Map" resultType="product">
+        select *
+        from (select @rownum := @rownum + 1 as num, tt.*
+              from
+                  (select * from product join (select @rownum := 0) rn where name like CONCAT('%', #{keyword}, '%')
+                  ) tt
+                  inner join
+                  sellCount s
+              on tt.seq_product = s.seq_product
+              order by s.selling_count desc) t
+        <![CDATA[
+        where num >= #{startPage}
+          and num <= #{endPage}
+        ]]>
+    </select>
+    <!-- 검색 상품 리스트: 가격순 -->
+    <select id="orderByPriceSearchList" parameterType="java.util.Map" resultType="product">
+        select * from
+        (select @rownum := @rownum + 1 as num, tt.* from
+        (select * from product join(select @rownum := 0) rn where name like CONCAT('%', #{keyword}, '%')
+        <if test='listType == "high"'>
+            order by price desc
+        </if>
+        <if test='listType == "low"'>
+            order by price
+        </if>
+        ) tt ) t
+        <![CDATA[
+        where num >= #{startPage} and num <= #{endPage}
+        ]]>
+    </select>
+
+    <!-- /////////////////////////////////////////////////////////////////////////////////// -->
+    <!-- 카테고리 상품 리스트: 추천순 -->
+    <select id="suggestionProList" parameterType="java.util.Map" resultType="product">
+        select * from
+        (select @rownum := @rownum + 1 as num, tt.* from
+        (select * from product p join(select @rownum := 0) rn
+        inner join
+        (select b.seq_basic_product as bsbp from basic_product b
+        inner join
+        (select * from middle_category where code_name = #{categoryCode}
+        <if test="subCategoryNum != 'null'">
+            and id = ${subCategoryNum}
+        </if>
+        ) m
+        on b.seq_middle_category = m.id )a on p.seq_basic_product = a.bsbp order by rand() ) tt ) t
+        <![CDATA[
+        where num >= #{startPage} and num <= #{endPage}
+        ]]>
+    </select>
+
+    <!-- 카테고리 상품 리스트: 신상품 순 -->
+    <select id="latelyProList" parameterType="java.util.Map" resultType="product">
+        select * from
+        (select @rownum := @rownum + 1 as num, tt.* from
+        (select * from product p join(select @rownum := 0) rn
+        inner join
+        (select b.seq_basic_product as bsbp from basic_product b
+        inner join
+        (select * from middle_category where code_name = #{categoryCode}
+        <if test="subCategoryNum != 'null'">
+            and id = ${subCategoryNum}
+        </if>
+        ) m
+        on b.seq_middle_category = m.id )a on p.seq_basic_product = a.bsbp
+        <![CDATA[
+        where DATEDIFF(now(), create_date) < 15 order by create_date DESC  ) tt ) t
+        where num >= #{startPage} and num <= #{endPage}
+        ]]>
+    </select>
+
+    <!-- 카테고리 상품 리스트: 베스트 순 -->
+    <select id="bestProList" parameterType="java.util.Map" resultType="product">
+        select * from
+        (select @rownum := @rownum + 1 as num, tt.* from
+        (select * from product p join(select @rownum := 0) rn
+        inner join
+        (select b.seq_basic_product as bsbp from basic_product b
+        inner join
+        (select * from middle_category where code_name = #{categoryCode}
+        <if test="subCategoryNum != 'null'">
+            and id = ${subCategoryNum}
+        </if>
+        ) m
+        on b.seq_middle_category = m.id )a on p.seq_basic_product = a.bsbp) tt
+        inner join sellCount s on tt.seq_product = s.seq_product order by s.selling_count desc ) t
+        <![CDATA[
+        where num >= #{startPage} and num <= #{endPage}
+        ]]>
+    </select>
+
+    <!-- 카테고리 상품 리스트: 가격 순 -->
+    <select id="orderByPriceProList" parameterType="java.util.Map" resultType="product">
+        select * from
+        (select @rownum := @rownum + 1 as num, tt.* from
+        (select * from product p join(select @rownum := 0) rn
+        inner join
+        (select b.seq_basic_product as bsbp from basic_product b
+        inner join
+        (select * from middle_category where code_name = #{categoryCode}
+        <if test="subCategoryNum != 'null'">
+            and id = ${subCategoryNum}
+        </if>
+        ) m
+        on b.seq_middle_category = m.id )a on p.seq_basic_product = a.bsbp
+        <if test='listType == "high"'>
+            order by price desc)
+        </if>
+        <if test='listType == "low"'>
+            order by price)
+        </if>
+        ) tt ) t
+        <![CDATA[
+        where num >= #{startPage} and num <= #{endPage}
+        ]]>
+    </select>
+
+    <!-- /////////////////////////////////////////////////////////////////////////////////// -->
+    <!--상품 리스트 정렬 유형: 필터 가격순-->
+    <select id="OrderByPrice" parameterType="java.util.Map" resultType="product">
+        select *
+        from product p
+        inner join
+        (
+        select b.seq_basic_product
+        from basic_product b
+        inner join
+        (select * from middle_category where code_name = #{big} and id = #{middle}) m
+        on b.seq_middle_category = m.id
+        ) a
+        on p.seq_basic_product = a.seq_basic_product
+        <if test='#{filter} == "high"'>
+            order by price desc
+        </if>
+        <if test='#{filter} == "low"'>
+            order by price
+        </if>
+
+    </select>
+
+    <!--상품 리스트 정렬 유형: 많이팔린순서-->
+    <select id="bestProductList" parameterType="java.util.Map" resultType="product">
+        select *
+        from product p
+                 inner join
+             (
+                 select b.seq_basic_product
+                 from basic_product b
+                          inner join
+                          (select * from middle_category where code_name = #{big} and id = #{middle}) m
+                          on b.seq_middle_category = m.id
+             ) a
+             on p.seq_basic_product = a.seq_basic_product
+                 inner join sellCount s
+                            on p.seq_product = s.seq_product
+        order by s.selling_count desc
+    </select>
+
+    <!-- /////////////////////////////////////////////////////////////////////////////////// -->
+    <!--베스트: 리뷰 Top 10 상품-->
+    <select id="getReviewProductTop10" resultType="product">
+        select *
+        from product p
+                 inner join
+             (select seq_order_pdt, seq_product, count(*) as c
+              from order_product
+              where review_check = 1
+              group by seq_product
+              order by c desc) a
+             on p.seq_product = a.seq_product limit 10
+    </select>
+    <!--베스트: 많이팔린 상품 Top 10-->
+    <select id="getSellingTopProduct" resultType="product">
+        select *
+        from product p
+                 inner join
+                 (select * from sellCount) a
+                 on p.seq_product = a.seq_product
+        order by a.selling_count desc limit 10
+    </select>
+    <!--베스트: MD 추천 (사실 랜덤 10개)-->
+    <select id="getSuggestionTopProduct" resultType="product">
+        select *
+        from product
+        order by rand() limit 10
+    </select>
+
+    <!-- /////////////////////////////////////////////////////////////////////////////////// -->
+    <!--공통: 특정 상품에대한 찜 수-->
+    <select id="getFavoriteCount" parameterType="list" resultType="long">
+        select count(*) from favorite where product_id in
+        <foreach collection="list" item="item" open="(" close=")" separator=",">
+            #{item.seq_product}
+        </foreach>
+        group by product_id
+        order by field (product_id,
+        <foreach collection="list" item="item" separator=",">
+            #{item.seq_product}
+        </foreach>
+        )
+    </select>
+    <!--공통: 카테고리 상품 리뷰 수-->
+    <select id="getProductReview" parameterType="list" resultType="long">
+        <!--        select count(*)-->
+        <!--        from review r-->
+        <!--        inner join order_product o-->
+        <!--        on r.seq_order_item = o.seq_order_pdt-->
+        <!--        where o.seq_procuct in-->
+        <!--        <foreach collection="list" item="item" open="(" close=")" separator=",">-->
+        <!--            #{item.seq_product}-->
+        <!--        </foreach>-->
+        <!--        group by o.seq_procuct-->
+        <!--        order by field (o.seq_procuct,-->
+        <!--        <foreach collection="list" item="item" separator=",">-->
+        <!--            #{item.seq_product}-->
+        <!--        </foreach>-->
+        <!--        )-->
+        select count(*) from review where seq_order_item in
+        <foreach collection="list" item="item" open="(" close=")" separator=",">
+            #{item.seq_product}
+        </foreach>
+        group by seq_order_item
+        order by field (seq_order_item,
+        <foreach collection="list" item="item" separator=",">
+            #{item.seq_product}
+        </foreach>
+        )
+    </select>
+    <!-- /////////////////////////////////////////////////////////////////////////////////// -->
+    <!--이벤트 상품 기본-->
+    <select id="eventProduct" parameterType="java.util.Map" resultType="product">
+        select *
+        from (select @rownum := @rownum + 1 as num, tt.*
+              from
+                  (select * from product p join (select @rownum := 0) rn
+                  inner join
+                  (select b.seq_basic_product as bsbp from basic_product b
+                  inner join
+                  (select * from middle_category where code_name in ('D10', 'D11')) m
+                  on b.seq_middle_category = m.id ) a on p.seq_basic_product = a.bsbp order by rand() ) tt) t
+        <![CDATA[
+        where num >= #{startPage}
+          and num <= #{endPage}
+        ]]>
+    </select>
+    <!--이벤트 상품 최신순-->
+    <select id="latelyEventProList" parameterType="java.util.Map" resultType="product">
+        select *
+        from (select @rownum := @rownum + 1 as num, tt.*
+              from
+                  (select * from product p join (select @rownum := 0) rn
+                  inner join
+                  (select b.seq_basic_product as bsbp from basic_product b
+                  inner join
+                  (select * from middle_category where code_name in ('D10', 'D11')) m
+                  on b.seq_middle_category = m.id ) a on p.seq_basic_product = a.bsbp order by create_date desc ) tt) t
+        <![CDATA[
+        where num >= #{startPage}
+          and num <= #{endPage}
+        ]]>
+    </select>
+    <!--이벤트 상품 가격순-->
+    <select id="orderByPriceProEventList" parameterType="java.util.Map" resultType="product">
+        select *
+        from (select @rownum := @rownum + 1 as num, tt.*
+        from
+        (select * from product p join (select @rownum := 0) rn
+        inner join
+        (select b.seq_basic_product as bsbp from basic_product b
+        inner join
+        (select * from middle_category where code_name in ('D10', 'D11')) m
+        on b.seq_middle_category = m.id ) a on p.seq_basic_product = a.bsbp order by price
+        <if test="listType == 'high'">
+            desc
+        </if>
+        ) tt) t
+        <![CDATA[
+        where num >= #{startPage}
+          and num <= #{endPage}
+        ]]>
+    </select>
+    <select id="bestProEventList" parameterType="java.util.Map" resultType="product">
+        select *
+        from product p
+                 inner join
+             (
+                 select b.seq_basic_product
+                 from basic_product b
+                          inner join
+                          (select * from middle_category where code_name in ('D10', 'D11')) m
+                          on b.seq_middle_category = m.id
+             ) a
+             on p.seq_basic_product = a.seq_basic_product
+                 inner join sellCount s
+                            on p.seq_product = s.seq_product
+        order by s.selling_count desc
+    </select>
+    <select id="getTotalEventProductRecords" resultType="int">
+        select count(*)
+        from product p
+                 inner join
+             (select b.seq_basic_product
+              from basic_product b
+                       inner join
+                   (select *
+                    from middle_category
+                    where code_name in ('D10', 'D11')) m
+                   on b.seq_middle_category = m.id) a
+             on p.seq_basic_product = a.seq_basic_product
+    </select>
+    <!--찜한 상품 목록-->
+    <select id="getFavoriteProduct" parameterType="java.util.List" resultType="product">
+        select *
+        from product
+        where seq_product
+        in
+        <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+            #{item.product_id}
+        </foreach>
+        order by field( seq_product,
+        <foreach collection="list" item="item" index="index" separator=",">
+            #{item.product_id}
+        </foreach>
+        )
+    </select>
+
+    <!--qna 상품 목록-->
+    <select id="getQnaProductList" parameterType="java.util.List" resultType="product">
+        select *
+        from product
+        where seq_product
+        in
+        <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+            #{item.seq_product}
+        </foreach>
+        order by field( seq_product,
+        <foreach collection="list" item="item" index="index" separator=",">
+            #{item.seq_product}
+        </foreach>
+        )
+    </select>
+
+    <!--주문 상품 목록-->
+    <select id="getOrderProductList" parameterType="java.util.List" resultType="product">
+        select *
+        from product
+        where seq_product
+        in
+        <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+            #{item.seq_product}
+        </foreach>
+        order by field( seq_product,
+        <foreach collection="list" item="item" index="index" separator=",">
+            #{item.seq_product}
+        </foreach>
+        )
+    </select>
+
+    <!--리뷰가능한 상품 목록-->
+    <select id="getReviewProssibleProduct" parameterType="java.util.List" resultType="product">
+        select *
+        from product
+        where seq_product
+        in
+        <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+            #{item.seq_product}
+        </foreach>
+        order by field( seq_product,
+        <foreach collection="list" item="item" index="index" separator=",">
+            #{item.seq_product}
+        </foreach>
+        )
+
+
+    </select>
+
+    <!-- 상품 상세 -->
+    <select id="getOneProductReview" parameterType="long" resultType="review">
+        select *
+        from review r
+                 inner join order_product o
+                            on r.seq_order_item = o.seq_order_pdt
+        where o.seq_product = #{seq_product}
+    </select>
+
+    <!-- 카테고리 가져오기 -->
+    <select id="getMiddleCategory" parameterType="String" resultType="middleCategory">
+        select middle_category.*
+        from product
+                 inner join basic_product
+                            on product.seq_basic_product = basic_product.seq_basic_product
+                 inner join middle_category
+                            on basic_product.seq_middle_category = middle_category.id
+                 inner join big_category
+                            on middle_category.seq_big_category = big_category.seq_big_category
+        where product.seq_product = #{seq_product}
+    </select>
+    <select id="getBigCategory" parameterType="String" resultType="bigCategory">
+        select big_category.*
+        from product
+                 inner join basic_product
+                            on product.seq_basic_product = basic_product.seq_basic_product
+                 inner join middle_category
+                            on basic_product.seq_middle_category = middle_category.id
+                 inner join big_category
+                            on middle_category.seq_big_category = big_category.seq_big_category
+        where product.seq_product = #{seq_product}
+    </select>
+
+    <select id="randomProduct" parameterType="long" resultType="product">
+        select *
+        from product
+                 inner join basic_product
+                            on product.seq_basic_product = basic_product.seq_basic_product
+                 inner join middle_category
+                            on basic_product.seq_middle_category = middle_category.id
+                 inner join big_category
+                            on middle_category.seq_big_category = big_category.seq_big_category
+        where big_category.seq_big_category = ${seq_big_category}
+        order by rand() limit 3
+    </select>
+
+    <select id="getOrderProduct" resultType="product" parameterType="long">
+        select *
+        from product
+                 inner join cart on product.seq_product = cart.seq_product
+        where cart.seq_member = #{memId}
+        group by cart.seq_product
+    </select>
+
+    <select id="getBuyProductList" parameterType="list" resultType="product">
+        select * from product where seq_product in
+        <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+            #{item.seq_product}
+        </foreach>
+    </select>
+</mapper>
+
+

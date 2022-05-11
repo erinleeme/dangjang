@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dangjang.mapper.LoginHistoryMapper">
+    <insert id="loginLog" parameterType="long">
+        insert into login_history (login_date, member_seq)
+        values (now(), #{memId})
+    </insert>
+    <!--logout 전 login 기록 seq 값 찾아오기-->
+    <select id="getLoginLog" parameterType="long" resultType="long">
+        select seq_log_history
+        from login_history
+        where member_seq = #{memId}
+          and logout_date is null
+        order by login_date limit 1
+    </select>
+    <!--logout 기록 남기기-->
+    <update id="logoutLog" parameterType="long">
+        update login_history set logout_date = now()
+        where seq_log_history = #{id}
+    </update>
+</mapper>

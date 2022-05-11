@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dangjang.mapper.OrderProductMapper">
+    <!-- 주문 전체 내역 리스트 -->
+    <select id="getOrderList" resultType="orders" parameterType="java.util.Map">
+        <![CDATA[
+        select * from
+            (select @rownum := @rownum + 1 as num, tt.* from
+                (select * from dangjang.orders join (select @rownum := 0)rn order by order_date desc)
+                tt)t
+        where num >= #{startPage} and num <= #{endPage} and seq_member = #{memberId}
+        ]]>
+    </select>
+
+    <!-- 반품/교환 전체 내역 리스트 -->
+    <select id="getOrderClaimList" resultType="orders" parameterType="java.util.Map">
+        <![CDATA[
+        select * from
+            (select @rownum := @rownum + 1 as num, tt.* from
+                (select * from dangjang.orders join (select @rownum := 0)rn order by order_date desc)
+                tt)t
+        where num >= #{startPage} and num <= #{endPage} and seq_member = #{memberId} and pay_status = '반품완료' or pay_status = '교환완료'
+        ]]>
+    </select>
+
+    <!-- 리뷰 가능한 주문 아이템 목록 리스트 -->
+    <select id="getOrderReviewList" resultType="orderProduct" parameterType="java.util.Map">
+        <![CDATA[
+        select * from  (select * from
+            (select @rownum := @rownum + 1 as num, tt.* from
+                (select * from dangjang.order_product join (select @rownum := 0)rn order by create_date desc)
+                tt)t
+                        where num >= #{startPage} and num <= #{endPage}})s where seq_order in
+                                                                                 (select seq_order from orders where order_status = '배송완료' and pay_status = '결제완료'
+                                                                                                                 and seq_member = #{memberId}) and review_check = 0
+        ]]>
+    </select>
+
+    <insert id="orderProductInsert" parameterType="orderProduct">
+        insert into order_product (seq_product, seq_order, count, review_check, create_date)
+        values(#{seq_product}, #{seq_order}, #{count}, 0, now())
+    </insert>
+
+    <select id="getBuyProduct" parameterType="long" resultType="orderProduct">
+        select * from order_product where seq_order = #{seq_order}
+    </select>
+
+</mapper>

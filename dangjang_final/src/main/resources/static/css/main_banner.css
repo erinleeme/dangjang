@@ -1,0 +1,50 @@
+#contentsArea{
+    background: #FFFFFF;
+    margin-bottom: 40px;
+}
+
+#contentsArea * {
+    box-sizing: border-box;
+}
+
+.main_banner{
+    width: 100%;
+    height: 600px;
+    margin-bottom: 40px;
+    /*border: 1px solid black;*/
+}
+
+.main_banner #slick-slider-main div {
+    width: 100%;
+    height: 600px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+.main_banner #slick-slider-main div img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ----------------------------------------------------- */
+.sectionContainer{
+    width: 100%;
+    /*border: 1px solid black;*/
+    margin-bottom: 100px;
+}
+
+.sectionContainer .random_line_banner{
+    width: 1050px;
+    margin: 0 auto;
+    /*border: 1px yellow solid;*/
+    height: 140px;
+}
+.sectionContainer .random_line_banner div {
+    width: 1050px;
+    height: 140px;
+}
+.sectionContainer .random_line_banner div img{
+    width: 1050px;
+    height: 140px;
+    object-fit: cover;
+}

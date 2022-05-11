@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dangjang.mapper.AddressMapper">
+    <insert id="addAddress" parameterType="java.util.Map">
+        insert into address(address1,
+                            address2,
+                            address_title,
+                            zipcode,
+                            seq_member,
+                            base_status,
+                            receptionName,
+                            recipient_phone,
+                            addressContent,
+                            create_date,
+                            update_date)
+        values ( #{addr1}
+               , #{a_addr_detail}
+               , #{addrName}
+               , #{zipcode}
+               , #{memberId}
+               , #{base_status}
+               , #{receptionName}
+               , #{recipient_phone}
+               , #{addressContent}
+               , NOW()
+               , NOW())
+    </insert>
+
+    <insert id="addressAdd" parameterType="java.util.Map">
+        insert into address(address1,
+                            address2,
+                            address_title,
+                            zipcode,
+                            seq_member,
+                            base_status,
+                            receptionName,
+                            recipient,
+                            recipient_phone,
+                            create_date)
+        values ( #{address1}
+               , #{address2}
+               , ''
+               , #{zipcode}
+               , #{seq_member}
+               , #{base_status}
+               , #{receptionName}
+               , #{recipient}
+               , #{recipient_phone}
+               , NOW())
+    </insert>
+
+    <update id="updateAddress" parameterType="java.util.Map">
+        update address
+        set address1=#{addr1},
+            address2=#{a_addr_detail},
+            address_title=#{addrName},
+            zipcode=#{zipcode},
+            seq_member=#{memberId},
+            base_status=#{base_status},
+            receptionName=#{receptionName},
+            recipient_phone=#{recipient_phone},
+            update_date=NOW(),
+            addressContent = #{a_addressContent}
+        where seq_address = #{seq_address}
+    </update>
+
+    <select id="getAddressOne" resultType="address" parameterType="Object">
+        select * from address where base_status = #{baseStatusNum}
+    </select>
+</mapper>

@@ -1,0 +1,480 @@
+.shipSection{
+    width: 1050px;
+    height: 100%;
+    position: relative;
+    /*border: 1px solid palegoldenrod;*/
+    margin: 0 auto;
+}
+/* 단계 표시 */
+.order_step{
+    display: block;
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+    /*border: 1px solid palevioletred;*/
+}
+.order_step p span{
+    padding: 0 20px;
+    color: #000000;
+    opacity: 0.5;
+}
+.order_step p span:after{
+    content: '>';
+    position: absolute;
+    margin-left: 15px;
+}
+.order_step p span:last-child:after{
+    display: none;
+}
+.order_step p span.order_step_select{
+    opacity: 1;
+    font-weight: 400;
+}
+/* -------------------------------------------------------------------------------- */
+
+.orderSummary h4{
+    font-size: 20px;
+    line-height: 30px;
+    font-weight: 400;
+    margin-bottom: 5px;
+}
+.orderSummary div{
+    border-top: 0.5px solid #00ACC1;
+}
+
+.summary_open{
+    display: block;
+    position: absolute;
+    overflow: hidden;
+    float: right;
+    right: 10px;
+    top: 70px;
+    width: 20px;
+    height: 20px;
+    margin-top: 5px;
+    margin-right: 10px;
+    border: 0;
+    background-image: url(../icon/angle_down.png);
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    font-size: 0;
+    text-indent: -9999px;
+    /* transform: rotate(180deg); */
+    transition: all 0.3s;
+}
+.summary_info{
+    height: 80px;
+    padding-top: 30px;
+    border-bottom: 1px solid #898989;
+    font-size: 16px;
+    color: #000000;
+    line-height: 24px;
+    text-align: center;
+}
+.shipForm{
+    margin-top: 40px;
+}
+
+.ship_view > div > h4{
+    font-size: 20px;
+    line-height: 30px;
+    font-weight: 400;
+    margin-bottom: 5px;
+}
+
+.ship_view > div{
+    margin-bottom: 80px;
+}
+
+.orderer_section{
+    overflow: hidden;
+}
+.orderinfo_table{
+    border-top: 0.5px solid #00ACC1;
+    border-bottom: none;
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    border-spacing: 0;
+    font-size: 14px;
+    line-height: 20px;
+}
+.orderinfo_table .table_1st{
+    padding-top: 20px;
+}
+.orderinfo_table th{
+    width: 190px;
+    padding: 8px 0 0;
+    color: #000000;
+    vertical-align: top;
+    text-align: left;
+    font-weight: 500;
+}
+.orderinfo_table td{
+    position: relative;
+    padding: 8px 0;
+    vertical-align: top;
+    font-weight: 400;
+
+}
+#s_address_list{
+    /* position: relative;
+    display: flex;
+    flex-direction: row-reverse; */
+    display: block;
+    position: absolute;
+    overflow: hidden;
+    float: right;
+    right: 10px;
+    top: 440px;
+    font-size: 14px;
+    padding: 5px 10px;
+    background-color: #00ACC1;
+    color: #FFFFFF;
+    border-radius: 8px;
+    cursor: pointer;
+}
+#s_address_list:hover{
+    background-color: #F50057;
+    color: #FFFFFF;
+}
+.address_section .default_addr{
+    text-align: center;
+    max-width: 100px;
+    font-size: 14px;
+    padding: 3px 8px;
+    border:1px solid #00ACC1;
+    color: #00ACC1;
+    border-radius: 8px;
+}
+.orderinfo_table td p {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.span_divi{
+    margin-right: 8px;
+}
+.span_divi:after{
+    content: '';
+    position: absolute;
+    margin-top: 5px;
+    margin-left: 5px;
+    width: 1px;
+    height: 12px;
+    background-color: #898989;
+}
+#selectDeliveryMessage{
+    border: 1px solid #898989;
+    border-radius: 5px;
+    width: 400px;
+    height: 40px;
+    font-size: 14px;
+    padding: 0 5px;
+    color: #898989;
+    margin-bottom: 5px;
+}
+#writeDeliveryMessage{
+    border: 1px solid #898989;
+    border-radius: 5px;
+    width: 400px;
+    height: 40px;
+    font-size: 14px;
+    padding: 0 10px;
+    color: #898989;
+    margin-bottom: 5px;
+}
+#writeDeliveryMessage:focus{
+    border: 1px solid #00ACC1;
+}
+.deliveryOption .orderinfo_table td p {
+    font-size: 14px;
+    color: #F50057;
+}
+.order_next_btn{
+    text-align: center;
+    margin-top: 150px;
+    margin-bottom: 80px;
+    cursor: pointer;
+}
+.order_next_btn > a{
+    display: inline-block;
+    width: 200px;
+    height: 60px;
+    border: 1px solid #1A237E;
+    border-radius: 5px;
+    color: #1A237E;
+    font-size: 18px;
+    line-height: 60px;
+    font-weight: 400;
+    vertical-align: middle;
+}
+.order_next_btn > a:hover{
+    color: #F50057;
+}
+
+/* 배송방법 선택 */
+.deliveryTypePart .deliveryType_section{
+    width: 1050px;
+    margin: 0 auto;
+    border-top: 0.5px solid #00ACC1;
+    margin-top: 5px;
+}
+
+.deliveryType_section input[type=radio]{
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+}
+.deliveryType_section input[type=radio]+.deliveryType_chk_box{
+    display: inline-block;
+    position: relative;
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    border: 1px solid #CFD8DC;
+    background-color: #FFFFFF;
+    border-radius: 100%;
+    vertical-align: -7px;
+    top: -3px;
+}
+.deliveryType_section input[type=radio]:checked+.deliveryType_chk_box:before{
+    content: '✔';
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 20px;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    position: absolute;
+    color: #FFFFFF;
+    background-color: #00ACC1;
+    border-radius: 100%;
+    left: 0;
+    top: 0;
+}
+.deliveryType_section .delivery_door_pwd{
+    display: none;
+}
+.deliveryType_section .delivery_door_pwd input[type=radio]+.deliveryType_chk_box2{
+    display: inline-block;
+    position: relative;
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    border: 1px solid #CFD8DC;
+    background-color: #FFFFFF;
+    border-radius: 100%;
+    top: 4px;
+}
+.deliveryType_section .delivery_door_pwd input[type=radio]:checked+.deliveryType_chk_box2:before{
+    content: '✔';
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 20px;
+    width: 20px;
+    height: 20px;
+
+    text-align: center;
+    position: absolute;
+    color: #FFFFFF;
+    background-color: #00ACC1;
+    border-radius: 100%;
+    left: 0;
+    top: 0;
+}
+
+
+#deliveryPwd{
+    height: 40px;
+    width: 400px;
+    border-radius: 8px;
+    border: 1px solid #CFD8DC;
+    margin-top: 10px;
+    padding-left: 10px;
+}
+
+.deliveryType_choose{
+    margin-top: 5px;
+}
+
+.delivery_door_pwd {
+    margin-top: 50px;
+}
+.delivery_door_pwd label{
+    margin-right: 15px;
+}
+.delivery_door_pwd p{
+    font-size: 14px;
+    margin: 5px 0;
+    color: #F50057;
+}
+
+/* 배송지 목록 모달 */
+.j_modal_background{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.4);
+}
+.deliveryAddrListModal{
+    color: #000000;
+    background-color: #FFFFFF;
+
+    width: 500px;
+    min-height: 500px;
+
+    margin-top: -250px;
+    margin-left: -250px;
+
+    display: none;
+    position: fixed;
+
+    top: 50%;
+    left: 50%;
+
+    z-index: 999999;
+    border: 1px solid #000000;
+    border-radius: 10px;
+}
+.deliveryAddrListBodyModal{
+    width: 450px;
+    height: 100%;
+    margin: 0 auto;
+    /*border: 1px solid red;*/
+    padding: 10px 15px;
+}
+#deliveryList_title > h4{
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 40px;
+    border-bottom: 1px solid #CFD8DC;
+}
+
+.de_list{
+    padding: 20px;
+    position: relative;
+    height: auto;
+}
+.de_list .de_list_detail:first-child{
+    margin-top: 5px;
+}
+
+.de_list_detail{
+    margin-top: 15px;
+    margin-bottom: 30px;
+    font-size: 14px;
+    padding: 10px 10px;
+}
+.de_list_detail:hover{
+    margin-top: 15px;
+    margin-bottom: 30px;
+    padding: 10px 10px;
+    border: 1px solid #F50057;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.de_list_detail:first-child:hover{
+    margin-top: 5px;
+    margin-bottom: 30px;
+    padding: 10px 10px;
+    border: 1px solid #F50057;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.de_list_detail .de_list_Recipient{
+    text-align: center;
+    min-width: 100px;
+    max-width: 350px;
+    font-size: 14px;
+    padding: 3px 8px;
+    border: 1px solid #1A237E;
+    color: #1A237E;
+    border-radius: 8px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-color: #FFFFFF;
+}
+
+#deliveryList_close_btn{
+    position: absolute;
+    float: right;
+    top: 0;
+    right: 0;
+    margin-right: 20px;
+    margin-top: 15px;
+    font-size: 20px;
+    color: #1A237E;
+    cursor: pointer;
+}
+#deliveryList_close_btn:hover{
+    color: #F50057;
+    font-weight: 600;
+}
+
+
+#de_list_plus_btn{
+    text-align: center;
+}
+#de_list_plus{
+    font-size: 14px;
+    padding: 2px 15px;
+    border-radius: 8px;
+    border: 1px solid #1A237E;
+    background-color: #ffffff;
+    color: #1A237E;
+}
+#de_list_plus:hover{
+    border: 1px solid #F50057;
+    color: #F50057;
+}
+
+#de_list_add{
+    display: none;
+    border: 1px solid #F50057;
+    border-radius: 8px;
+}
+
+#de_list_add input[type=text]{
+    margin-left: 15px;
+    border: none;
+    border-bottom: 1px solid #1A237E;
+    padding: 0 15px 0 15px;
+}
+#de_list_add input[type=text]:focus{
+    outline: none;
+    margin-left: 15px;
+    border: none;
+    border-bottom: 1px solid #1A237E;
+    padding: 0 15px 0 15px;
+}
+#de_list_add_btn{
+    display: none;
+    text-align: center;
+    margin-top: -20px;
+    margin-bottom: 40px;
+}
+#de_list_add_cancel{
+    font-size: 14px;
+    padding: 2px 5px;
+    border-radius: 8px;
+    color: #1A237E;
+    border: 1px solid #1A237E;
+    margin-right: 15px;
+    cursor: pointer;
+}
+#de_list_add_save{
+    font-size: 14px;
+    padding: 2px 5px;
+    border-radius: 8px;
+    color: #FFFFFF;
+    background-color: #F50057;
+    cursor: pointer;
+}

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dangjang.mapper.DeliveryMapper">
+    <insert id="deliveryInsert" parameterType="delivery">
+        insert into delivery (seq_delivery,
+                              address1,
+                              address2,
+                              seq_address,
+                              zipcode,
+                              orderer_name,
+                              orderer_phone,
+                              parcel_company,
+                              parcel_details,
+                              parcel_type,
+                              recipient_name,
+                              recipient_phone,
+                              tracking_number,
+                              delivery_status,
+                              create_date)
+        values (#{seq_delivery},
+                #{address1},
+                #{address2},
+                #{seq_address},
+                #{zipcode},
+                #{orderer_name},
+                #{orderer_phone},
+                #{parcel_company},
+                #{parcel_details},
+                #{parcel_type},
+                #{recipient_name},
+                #{recipient_phone},
+                #{tracking_number},
+                #{delivery_status},
+                now())
+    </insert>
+    <!--phone 번호로 기존 delivery seq 값 가져오기-->
+    <select id="getMemberdeliverySeq" parameterType="string" resultType="long">
+        select seq_delivery
+        from delivery
+        where orderer_phone = #{phone}
+        order by create_date desc limit 1
+    </select>
+
+
+</mapper>

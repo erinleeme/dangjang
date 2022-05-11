@@ -1,0 +1,86 @@
+/*  
+main color
+    #1A237E
+    #F50057
+    #FFFFFF
+    #00ACC1
+    #CFD8DC
+*/
+/* font-style*/
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+
+/* 공통 css */
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+body *{
+    box-sizing: border-box;
+}
+
+address, article, aside, blockquote,
+details, dialog, dd, div, dl, dt,
+fieldset, figcaption, figure, footer,
+form, h1, h2, h3, h4, h5, h6, header, hgroup,
+hr, li, main, nav, ol, p, pre, section, table, ul{
+    padding: 0px;
+    margin: 0px;
+}
+
+img, input, button, textarea {
+    margin: 0;
+    padding: 0;
+    vertical-align: top;
+    font-weight: 400;
+}
+
+.allWarp{
+    position: relative;
+    width: 100vw;
+    min-width: 1050px;
+    height: 100vh;
+    min-height: 100vh;
+}
+
+a:link{
+    text-decoration: none;
+}
+
+img{
+    image-rendering: -webkit-optimize-contrast;
+}
+
+li{
+    list-style: none;
+}
+
+/* ----------------------------------------------------- */
+/* TOP btn */
+.pageTop a{
+    overflow: hidden;
+    position: fixed;
+    z-index: 300;
+    right: 40px;
+    bottom: 15px;
+    width: 58px;
+    height: 58px;
+    border: 0;
+    background-image: url(../icon/circle-arrow-top.png);
+    background-repeat: no-repeat;
+    background-position: 50%;
+    background-size: 58px;
+    font-size: 0;
+    line-height: 0;
+    text-indent: -9999px;
+}
+
+/* main container div 영역 */
+#main_container{
+    width: 100%;
+    height: 100%;
+    potision: relative;
+    display: block;
+    margin-bottom: 50px;
+}

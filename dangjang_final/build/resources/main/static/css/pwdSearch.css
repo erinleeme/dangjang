@@ -1,0 +1,282 @@
+.dPwdSearchSection{
+    width: 100%;
+    min-width: 1050px;
+    height: 700px;
+    padding-bottom: 40px;
+    /*border: 1px solid black;*/
+}
+
+.dPwdSearchSection *{
+    box-sizing: border-box;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.dPwdSearchContainer{
+    width: 580px;
+    margin: 0 auto;
+    padding-top: 80px;
+    /*border: 1px solid black;*/
+}
+
+.d_pwdSearch h1{
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 30px;
+    text-align: center;
+    padding-bottom: 30px;
+}
+
+.d_pwdSearch_content{
+    margin-top: 10px;
+    /*border: 1px solid black;*/
+}
+
+.d_pwdSearch_content .pwdSearchForm > div > div input{
+    width: 580px;
+    height: 60px;
+    border: 1px solid #CFD8DC;
+    border-radius: 5px;
+    font-size: 14px;
+    line-height: 14px;
+    padding: 0 19px;
+    margin-bottom: 10px;
+}
+
+.pwdSearch_btn:disabled{
+    border: 1px solid #CFD8DC;
+    color: #CFD8DC;
+    background-color: #FFFFFF;
+}
+
+.pwdSearch_btn{
+    display: block;
+    padding: 0 10px;
+    text-align: center;
+    overflow: hidden;
+    width: 580px;
+    height: 60px;
+    background-color: #F50057;
+    color: #FFFFFF;
+    border-radius: 5px;
+    border: 0;
+}
+
+.pwdSearch_btn > span{
+    display: inline-block;
+    font-size: 16px;
+}
+
+.pwdSearch_btn:hover{
+    cursor: pointer;
+}
+/* ----------------------------------------- */
+.pwdSearch_chk_btn{
+    display: none;
+    padding: 0 10px;
+    text-align: center;
+    overflow: hidden;
+    width: 580px;
+    height: 60px;
+    background-color: #F50057;
+    color: #FFFFFF;
+    border-radius: 5px;
+    border: 0;
+}
+
+.pwdSearch_chk_btn > span{
+    display: inline-block;
+    font-size: 16px;
+}
+
+.pwdSearch_chk_btn:hover{
+    cursor: pointer;
+}
+
+.pwdSearch_chk_btn:disabled{
+    border: 1px solid #CFD8DC;
+    color: #CFD8DC;
+    background-color: #FFFFFF;
+}
+
+
+.pwdSearch_verification{
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.pwdSearch_verification > div > div {
+    position: relative;
+}
+
+#pwdSearch_number{
+    width: 480px;
+    height: 60px;
+    border: 1px solid #CFD8DC;
+    border-radius: 5px;
+    font-size: 14px;
+    line-height: 14px;
+    padding: 0 19px;
+    margin-bottom: 10px;
+}
+
+.pwdSearchNum_request_btn{
+    display: block;
+    padding: 0 10px;
+    text-align: center;
+    overflow: hidden;
+    width: 80px;
+    height: 60px;
+    background-color: #FFFFFF;
+    color: #F50057;
+    border-radius: 5px;
+    border: 1px solid #F50057;
+    text-align: center;
+    top: -2px;
+    cursor: pointer;
+}
+
+.pwdSearchNum_request_btn:disabled{
+    display: block;
+    padding: 0 10px;
+    text-align: center;
+    overflow: hidden;
+    width: 80px;
+    height: 60px;
+    background-color: #FFFFFF;
+    color: #CFD8DC;
+    border-radius: 5px;
+    border: 1px solid #CFD8DC;
+    text-align: center;
+    top: -2px;
+    cursor: pointer;
+}
+
+.pwdSearchNum_request_btn span{
+    display: inline-block;
+    font-size: 16px;
+}
+
+#pwdSearch_count{
+    position: absolute;
+    right: 110px;
+    bottom: 26px;
+    font-size: 15px;
+    color: #CFD8DC;
+    line-height: 24px;
+}
+/* 비밀번호 수정 */
+.d_rePwdSection{
+    width: 100%;
+    min-width: 1050px;
+    height: 700px;
+    padding-bottom: 40px;
+    /*border: 1px solid black;*/
+}
+
+.d_rePwdSection *{
+    box-sizing: border-box;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.d_rePwdContainer{
+    width: 580px;
+    margin: 0 auto;
+    padding-top: 80px;
+    /*border: 1px solid black;*/
+}
+
+.d_repwd_title h1{
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 30px;
+    text-align: center;
+    padding-bottom: 30px;
+}
+
+.d_repwd_content{
+    margin-top: 10px;
+    /*border: 1px solid black;*/
+}
+
+.d_repwd_content .repwdForm > div > div input{
+    width: 580px;
+    height: 60px;
+    border: 1px solid #CFD8DC;
+    border-radius: 5px;
+    font-size: 14px;
+    line-height: 14px;
+    padding: 0 19px;
+    margin-bottom: 5px;
+}
+
+.d_repwd_btn:disabled{
+    background-color: #CFD8DC;
+}
+
+.d_repwd_btn{
+    display: block;
+    padding: 0 10px;
+    text-align: center;
+    overflow: hidden;
+    width: 580px;
+    height: 60px;
+    background-color: #F50057;
+    color: #FFFFFF;
+    border-radius: 5px;
+    border: 0;
+}
+
+.d_repwd_btn > span{
+    display: inline-block;
+    font-size: 16px;
+}
+
+.d_repwd_btn:hover{
+    cursor: pointer;
+}
+
+/* ------------------------------------------------------ */
+/* 비밀번호 재설정 */
+.r_div{
+    display: none;
+    padding: 10px 0 9px;
+    font-size: 12px;
+    color: #333333;
+    line-height: 18px;
+    word-break: break-all;
+    clear: both;
+    margin-bottom: 20px;
+}
+.r_div span{
+    display: block;
+    padding-bottom: 10px;
+}
+.r_div span:last-child{
+    display: block;
+    padding-bottom: 0px;
+}
+.r_div span:before{
+    content: '\2022';
+    display: inline-block;
+    padding: 0 4px 0 2px;
+    font-size: 12px;
+    vertical-align: 0;
+}
+
+.r_div span.wrong:before{
+    content: '\2715';
+    display: inline-block;
+    padding: 0 4px 0 2px;
+    font-size: 12px;
+    vertical-align: 0;
+}
+.r_div span.great:before{
+    content: '\2713';
+    display: inline-block;
+    padding: 0 4px 0 2px;
+    font-size: 12px;
+    vertical-align: 0;
+}

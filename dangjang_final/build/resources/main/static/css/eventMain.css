@@ -1,0 +1,116 @@
+.eventMain{
+    width: 1050px;
+    height: 2400px;
+    margin: 0 auto;
+    margin-top: 20px;
+    border: 1px green solid;
+}
+
+.eventBannerSection{
+    width: 100%;
+    border: 1px solid black;
+    margin-bottom:  40px;
+}
+
+.eventBannerSection .event_one img{
+    width: 1050px;
+    margin: 0 auto;
+    border: 1px yellow solid;
+    height: 140px;
+    object-fit: cover;
+}
+
+.evt_CatList{
+    position: relative;
+}
+
+.evt_title{
+    padding-top: 20px;
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 40px;
+    color: #000000;
+    letter-spacing: 01px;
+    text-align: center;
+}
+
+.evt_CatList > ul{
+    display: block;
+    overflow: hidden;
+    margin-top: 20px;
+    padding: 12px 0 29px;
+    border: 1px solid #CFD8DC;
+
+}
+
+.evt_CatList > ul > li {
+    float: left;
+    width: 260px;
+    padding: 16px 44px 0 39px;
+}
+
+.category_subCat{
+    overflow: hidden;
+    float: left;
+    max-width: 180px;
+    line-height: 20px;
+    font-size: 14px;
+    color: #000000;
+    letter-spacing: 0.2px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    cursor: pointer;
+    font-weight: 300;
+}
+
+.cat_list_choose{
+    color: #F50057;
+    font-weight: 400;
+}
+
+.category_subCat:hover{
+    color: #F50057;
+}
+
+.list_attr{
+    padding-top: 20px;
+}
+
+.goods_count{
+    float: left;
+    padding-left: 8px;
+}
+
+.goods_count > span{
+    font-size: 12px;
+    color: #000000;
+    line-height: 18px;
+}
+
+.attr_type > ul {
+    float: right;
+}
+
+.attr_type > ul > li {
+    position: relative;
+    z-index: 2;
+    float: left;
+    padding: 0 10px 0 8px;
+    font-size: 12px;
+    color: #CFD8DC;
+    line-height: 18px;
+}
+
+.attr_choose{
+    color: #000000;
+}
+
+.attr_type > ul > li:after{
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 4px;
+    width: 1px;
+    height: 11px;
+    background-color: #CFD8DC;
+}

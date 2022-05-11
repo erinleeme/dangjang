@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dangjang.mapper.ReviewMapper">
+    <!--해당 상품에 달려있는 review 정보들-->
+    <select id="getProductReview" parameterType="java.util.Map" resultType="com.dangjang.dto.ReviewPlusMapperDTO">
+        select *
+        from (select @rownum := @rownum + 1 as num, tt.*
+              from
+                  (select m.name, a.seq_review, a.seq_member, a.seq_order_item, a.content, a.reply_content, a.score,
+                  a.member_date, a.admin_date
+                  from member m inner join (select @rownum := 0) rn
+                  inner join
+                  (select * from review r
+                  inner join
+                  (select * from order_product where seq_product = #{seq_product}) o
+                  on r.seq_order_item = o.seq_order_pdt
+                  where o.review_check = 1) a
+                  on m.seq_member = a.seq_member) tt) t
+        <![CDATA[
+        where num >= #{startPage}
+          and num <= #{endPage}
+        ]]>
+    </select>
+    <!--해당 상품의 review 총 수-->
+    <select id="getTotalReviewRecords" parameterType="string" resultType="int">
+        select count(*)
+        from review r
+                 inner join
+                 (select * from order_product where seq_product = #{seq_product}) o
+                 on r.seq_order_item = o.seq_order_pdt
+    </select>
+
+    <!-- 리뷰 작성 -->
+    <insert id="writeReview" parameterType="java.util.Map">
+        insert into review (content,
+                            member_date,
+                            seq_order_item,
+                            score,
+                            seq_member,
+                            image1,
+                            image2)
+        values (
+                   #{content},
+                   now(),
+                   #{seq_order_pdt},
+                   #{score},
+                   #{memberId},
+                   #{image1},
+                   #{image2}
+               )
+    </insert>
+
+    <select id="getWrittenReviewList" parameterType="java.util.Map" resultType="writtenReview">
+       <![CDATA[
+        select * from
+            (select @rownum := @rownum + 1 as num, tt.* from
+                (select * from (select r.seq_review, b.serial_number, date_format(o.create_date, '%Y.%m.%d')as create_date,
+                o.count, p.name, r.content, r.reply_content, r.score, r.image1, r.image2, o.seq_order_pdt
+                from review as r
+                inner join order_product as o on r.seq_order_item = o.seq_order_pdt
+                inner join product as p on o.seq_product = p.seq_product
+                inner join basic_product as b on p.seq_basic_product = b.seq_basic_product
+                where o.review_check = 1 and r.seq_member = #{memberId} order by r.member_date desc )s join (select @rownum := 0)rn )
+                tt)t
+        where num >= #{startPage} and num <= #{endPage}
+        ]]>
+    </select>
+
+    <!-- 리뷰 수정 -->
+    <update id="updateReview" parameterType="java.util.Map">
+        update review set content = #{content},
+                          member_date = now(),
+                          seq_order_item=#{seq_order_pdt},
+                          score=#{score},
+                          image1=#{image1},
+                          image2=#{image2}
+        where seq_review = #{seq_review}
+    </update>
+    <select id="getReviewPossibleList" parameterType="java.util.Map" resultType="reviewPossible">
+        <![CDATA[
+        select * from
+            (select @rownum := @rownum + 1 as num, tt.* from
+                (select * from (select p.name, bp.serial_number,
+                o.seq_member, op.review_check, op.count, o.order_status,
+                date_format(op.create_date, '%Y.%m.%d') as create_date, op.seq_order_pdt
+                from order_product op
+                inner join product p on op.seq_product = p.seq_product
+                inner join basic_product bp on p.seq_basic_product = bp.seq_basic_product
+                inner join orders o on op.seq_order = o.seq_order
+                where op.order_status = '주문완료' and review_check = 0 and o.order_status = '배송완료' and o.seq_member = #{memberId})a
+                join (select @rownum := 0)rn order by create_date desc)
+                tt)t
+        where num >= #{startPage} and num <= #{endPage}
+
+        ]]>
+    </select>
+    <select id="getReviewPossibleCount" parameterType="String" resultType="int">
+        select count(*) from (
+                                 select p.name, bp.serial_number, o.seq_member,
+                                        op.review_check, op.count, o.order_status,
+                                        date_format(op.create_date, '%Y.%m.%d') as create_date
+                                 from order_product op
+                                          inner join product p on op.seq_product = p.seq_product
+                                          inner join basic_product bp on p.seq_basic_product = bp.seq_basic_product
+                                          inner join orders o on op.seq_order = o.seq_order
+                                 where op.order_status = '주문완료' and review_check = 0 and o.order_status = '배송완료' and o.seq_member = #{memberId})a
+    </select>
+
+</mapper>

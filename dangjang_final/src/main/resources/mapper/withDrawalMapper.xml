@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dangjang.mapper.WithDrawalMapper">
+    <insert id="withdrawalSave" parameterType="member">
+        insert into withdrawal(seq_member,
+                               agreement,
+                               birth,
+                               delete_date,
+                               email1,
+                               email2,
+                               gender,
+                               login_id,
+                               nick_name,
+                               pwd,
+                               phone,
+                               social,
+                               create_date,
+                               seq_withdrawal)
+        values(#{seq_member},
+               #{agreement},
+               #{birth},
+               now(),
+               #{email1},
+               #{email2},
+               #{gender},
+               #{login_id},
+               #{nickname},
+               #{pwd},
+               #{phone},
+               #{social},
+               #{create_date},
+               #{seq_member})
+    </insert>
+</mapper>

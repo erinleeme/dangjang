@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dangjang.mapper.OrderMapper">
+    <!--결제시에 처음 저장되는 order 정보-->
+    <insert id="orderInformationInsert" parameterType="orders">
+        insert into orders
+        (
+        seq_order,
+        seq_member,
+        seq_delivery,
+        order_num,
+        delivery_type,
+        original_total_price,
+        delivery_price,
+        discount_price,
+        pay_status,
+        order_date,
+        final_price
+        <if test="seq_coupon != null">
+            ,seq_coupon
+        </if>
+        )
+        values
+        (
+        #{seq_order},
+        #{seq_member},
+        #{seq_delivery},
+        #{order_num},
+        #{delivery_type},
+        #{original_total_price},
+        #{delivery_price},
+        #{discount_price},
+        #{pay_status},
+        now(),
+        #{final_price}
+        <if test="seq_coupon != null">
+            ,#{seq_coupon}
+        </if>
+        )
+    </insert>
+
+    <!-- 주문 전체 내역 리스트 -->
+    <select id="getOrderList" resultType="orders" parameterType="java.util.Map">
+        <![CDATA[
+        select * from
+            (select @rownum := @rownum + 1 as num, tt.* from
+                (select * from dangjang.orders join (select @rownum := 0)rn order by order_date desc)
+                tt)t
+        where num >= #{startPage} and num <= #{endPage} and seq_member = #{memberId}
+        ]]>
+    </select>
+
+    <!-- 반품/교환 전체 내역 리스트 -->
+    <select id="getOrderClaimList" resultType="orderClaim" parameterType="java.util.Map">
+        <![CDATA[
+        select * from
+            (select @rownum := @rownum + 1 as num, tt.* from
+                (select * from (select bp.serial_number, o.order_num, o.seq_order, o.seq_member, p.name, op.count, op.order_status,
+                date_format(claim_date, '%Y.%m.%d') as claim_date, date_format(d.end_date, '%Y.%m.%d') as end_date, op.claim_content,
+                p.seq_product
+                from order_product as op
+                inner join orders as o
+                on op.seq_order = o.seq_order
+                inner join product as p
+                on op.seq_product = p.seq_product
+                inner join basic_product as bp
+                on p.seq_basic_product = bp.seq_basic_product
+                inner join delivery d
+                on o.seq_delivery = d.seq_delivery
+                where op.order_status = '반품완료' or op.order_status = '교환완료' and o.seq_member = #{memberId})s join (select @rownum := 0)rn order by claim_date desc)
+                tt)t
+        where num >= #{startPage} and num <=#{endPage}
+        ]]>
+    </select>
+
+    <select id="getOrderListMapper" resultType="orderList" parameterType="java.util.Map">
+        <![CDATA[
+        select * from
+            (select @rownum := @rownum + 1 as num, tt.* from
+                (select * from  (select o.seq_order, o.pay_status, date_format(o.order_date, '%Y.%m.%d')as order_date, o.order_num, d.recipient_name, o.final_price, p.name, b.serial_number, d.delivery_status
+                from orders o
+                inner join delivery as d
+                on o.seq_delivery = d.seq_delivery
+                inner join
+                order_product as op
+                on o.seq_order = op.seq_order
+                inner join
+                product as p
+                on op.seq_product = p.seq_product
+                inner join
+                basic_product as b
+                on p.seq_basic_product = b.seq_basic_product
+                where o.seq_member = #{memberId}
+                group by o.seq_order )s join (select @rownum := 0)rn order by order_date desc)
+                tt)t
+        where num >=#{startPage} and num <= #{endPage}
+        ]]>
+    </select>
+
+    <!--교환/반품 개수-->
+    <select id="getOrderClaimCount" parameterType="String" resultType="int">
+        select count(*)
+        from order_product as op
+                 inner join orders as o
+                            on op.seq_order = o.seq_order
+                 inner join product as p
+                            on op.seq_product = p.seq_product
+                 inner join basic_product as bp
+                            on p.seq_basic_product = bp.seq_basic_product
+        where op.order_status = '반품완료' or op.order_status = '교환완료' and o.seq_member = #{memberId}
+    </select>
+
+    <select id="getOrderNumnDate" parameterType="long" resultType="orders">
+        select * from orders where seq_member = #{memId} order by order_date desc limit 1
+    </select>
+</mapper>

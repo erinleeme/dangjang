@@ -1,0 +1,173 @@
+/* footer css */
+.dFooter{
+    text-align: center;
+}
+.footerArea{
+    background: #FFFFFF;
+}
+
+.dFooter a{
+    color: black;
+}
+
+/* ----------------------------------------------------- */
+
+.footerContent{
+    width: 1050px;
+    position: relative;
+    margin: 0px auto;
+    padding: 40px 0px 0px 0px;
+    text-align: left;
+}
+
+.footerContent .customerCenter{
+    padding: 0px 0px 0px 0px;
+}
+
+.footerContent * {
+    box-sizing: border-box;
+}
+
+.footerContent .customerCenter h3{
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 45px;
+    height: 45px;
+}
+
+.footerContent .customerCenter h3 a{
+    color: black;
+}
+
+.footerContent .customerCenter h3 a:hover{
+    color: #00ACC1;
+}
+
+.footerContent .customerCenter p {
+    height: 28px;
+    line-height: 28px;
+    font-size: 16px;
+}
+
+.footerContent .customerCenter p strong{
+    display: inline-block;
+    font-size: 35px;
+    font-weight: 900;
+    line-height: 28px;
+    height: 28px;
+    vertical-align: middle;
+    letter-spacing: -0.5px;
+    margin-right: 20px;
+}
+
+.footerContent .customerCenter p span{
+    display: inline-block;
+    color: #828282;
+    line-height: 16px;
+    height: 16px;
+    vertical-align: bottom;
+    margin-right: 3px;
+}
+
+.footerContent .customerCenter p b{
+    display: inline-block;
+    line-height: 16px;
+    height: 16px;
+    font-weight: 400;
+    vertical-align: bottom;
+    margin-right: 8px;
+}
+
+.footerContent .githubLink {
+    position: absolute;
+    top: 88px;
+    right: 0px;
+    text-align: right;
+}
+
+.footerContent .githubLink a{
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+}
+
+.footerContent .githubLink img{
+    width: 50px;
+    height: 50px;
+}
+
+/* ----------------------------------------------------- */
+
+.footerInfo{
+    width: 1050px;
+    position: relative;
+    margin: 0px auto;
+    padding: 10px 0px 0px 0px;
+    text-align: left;
+}
+
+.footerInfo .address_open {
+    position: relative;
+    display: inline-block;
+    margin-top: 20px;
+    padding-right: 18px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 16px;
+}
+
+.footerInfo .address_open:after{
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 0;
+    display: block;
+    width: 12px;
+    height: 12px;
+    margin-top: -6px;
+    background-image: url(../icon/angle_down.png);
+    background-position-x: center;
+    background-position-y: center;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    transition: all 0.3s;
+}
+
+.footerInfo .address_open.info_on:after{
+    transform: rotate(180deg);
+}
+
+.footerInfo address {
+    margin-top: 10px;
+    font-style: normal;
+}
+
+.footerInfo address ul{
+    font-size: 14px;
+    line-height: 1.65;
+    color: #828282;
+}
+
+/* ----------------------------------------------------- */
+
+.footer_bottom{
+    width: 1050px;
+    position: relative;
+    margin: 0px auto;
+    padding: 10px 0px 0px 0px;
+    text-align: left;
+}
+
+.footer_bottom li{
+    display: inline-block!important;
+    font-size: 16px;
+    padding-right: 10px;
+}
+
+.footer_bottom p {
+    padding: 20px 0px 0px 0px;
+    font-size: 14px;
+    color: #1A237E;
+}
+

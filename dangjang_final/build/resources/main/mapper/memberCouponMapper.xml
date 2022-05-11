@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dangjang.mapper.MemberCouponMapper">
+    <!-- 멤버쿠폰 리스트 -->
+    <select id="getMyCouponList" resultType="memberCoupon" parameterType="java.util.Map">
+         <![CDATA[
+        select *
+        from (select @rownum := @rownum + 1 as num, tt.*
+              from
+                  (select * from dangjang.member_coupon join (select @rownum := 0) rn order by receive_date desc)
+                  tt) t
+        where num >= #{startPage}
+          and num <= #{endPage}
+          and seq_member = #{memberId}
+          and coupon_status = '미사용'
+        ]]>
+    </select>
+
+    <select id="getCouponList" parameterType="java.util.Map" resultType="coupon">
+        select *
+        from coupon
+        inner join member_coupon as m
+        on coupon.seq_coupon = m.seq_coupon
+        where coupon.seq_coupon in
+        <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+            #{item.seq_coupon}
+        </foreach>
+        and m.seq_member = ${memId}
+        and m.coupon_status = '미사용'
+        order by field(coupon.seq_coupon,
+        <foreach collection="list" item="item" index="index" separator=",">
+            #{item.seq_coupon}
+        </foreach>
+        )
+    </select>
+
+
+    <delete id="deleteUseCoupon" parameterType="java.util.Map">
+        delete
+        from member_coupon
+        where seq_member = #{memId}
+          and seq_coupon = #{coupon}
+    </delete>
+
+
+</mapper>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <typeAliases>
+        <typeAlias type="com.dangjang.dto.AddressMapperDTO" alias="address" />
+        <typeAlias type="com.dangjang.dto.AlarmMapperDTO" alias="alarm" />
+        <typeAlias type="com.dangjang.dto.BasicProductMapperDTO" alias="basicProduct"/>
+        <typeAlias type="com.dangjang.dto.BigCategoryMapperDTO" alias="bigCategory"/>
+        <typeAlias type="com.dangjang.dto.CartMapperDTO" alias="cart"/>
+        <typeAlias type="com.dangjang.dto.CouponMapperDTO" alias="coupon"/>
+        <typeAlias type="com.dangjang.dto.DeliveryMapperDTO" alias="delivery"/>
+        <typeAlias type="com.dangjang.dto.EatenTrashMapperDTO" alias="eatenTrash"/>
+        <typeAlias type="com.dangjang.dto.EventMapperDTO" alias="event"/>
+        <typeAlias type="com.dangjang.dto.EventProductMapperDTO" alias="eventProduct"/>
+        <typeAlias type="com.dangjang.dto.FAQMapperDTO" alias="faq"/>
+        <typeAlias type="com.dangjang.dto.FavoriteMapperDTO" alias="favorite"/>
+        <typeAlias type="com.dangjang.dto.HelpDeskMapperDTO" alias="helpDesk"/>
+        <typeAlias type="com.dangjang.dto.ImageContentMapperDTO" alias="imageContent"/>
+        <typeAlias type="com.dangjang.dto.LoginHistoryMapperDTO" alias="loginHistory"/>
+        <typeAlias type="com.dangjang.dto.MemberCouponMapperDTO" alias="memberCoupon"/>
+        <typeAlias type="com.dangjang.dto.MemberMapperDTO" alias="member"/>
+        <typeAlias type="com.dangjang.dto.MemberRefrigeratorMapperDTO" alias="memberRef"/>
+        <typeAlias type="com.dangjang.dto.MiddleCategoryMapperDTO" alias="middleCategory"/>
+        <typeAlias type="com.dangjang.dto.NoticeMapperDTO" alias="notice"/>
+        <typeAlias type="com.dangjang.dto.OneToOneRequestMapperDTO" alias="oneToOneRequest"/>
+        <typeAlias type="com.dangjang.dto.OrderProductMapperDTO" alias="orderProduct"/>
+        <typeAlias type="com.dangjang.dto.OrdersMapperDTO" alias="orders"/>
+        <typeAlias type="com.dangjang.dto.PaymentMapperDTO" alias="payment"/>
+        <typeAlias type="com.dangjang.dto.ProductMapperDTO" alias="product"/>
+        <typeAlias type="com.dangjang.dto.QnAMapperDTO" alias="qna"/>
+        <typeAlias type="com.dangjang.dto.RefrigeratorMapperDTO" alias="refrigerator"/>
+        <typeAlias type="com.dangjang.dto.RefrigeratorProductMapperDTO" alias="refProduct"/>
+        <typeAlias type="com.dangjang.dto.ReviewMapperDTO" alias="review"/>
+        <typeAlias type="com.dangjang.dto.SaleProductMapperDTO" alias="saleProduct"/>
+        <typeAlias type="com.dangjang.dto.SellCountMapperDTO" alias="sellCount"/>
+        <typeAlias type="com.dangjang.dto.ShareRefrigeratorMapperDTO" alias="shareRef"/>
+        <typeAlias type="com.dangjang.dto.WithDrawalMapperDTO" alias="withDrawal"/>
+        <typeAlias type="com.dangjang.dto.WrittenReviewMapperDTO" alias="writtenReview"/>
+        <typeAlias type="com.dangjang.dto.OrderClaimMapperDTO" alias="orderClaim"/>
+        <typeAlias type="com.dangjang.dto.OrderListMapperDTO" alias="orderList"/>
+        <typeAlias type="com.dangjang.dto.ReviewPossibleMapperDTO" alias="reviewPossible"/>
+        <typeAlias type="com.dangjang.dto.CouponMapperSDTO" alias="couponS"/>
+        <typeAlias type="com.dangjang.dto.OneToOneRequestMapperSDTO" alias="onetooneS"/>
+        <typeAlias type="com.dangjang.dto.QnAMapperSDTO" alias="qnaS"/>
+        <typeAlias type="com.dangjang.dto.QnAPlusMapperDTO" alias="qnaPlus"/>
+    </typeAliases>
+</configuration>

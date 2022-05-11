@@ -1,0 +1,8 @@
+package com.dangjang.service;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class MiddleCategoryService {
+
+}

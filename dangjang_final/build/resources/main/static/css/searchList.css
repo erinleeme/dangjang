@@ -1,0 +1,75 @@
+.searchResultMain{
+    width: 1050px;
+    margin: 0 auto;
+    height: 100%;
+}
+.searchResultHeader{
+    text-align: center;
+    margin: 40px auto;
+    position: relative;
+    padding-top: 40px;
+}
+.searchResultHeader h1{
+    text-align: center;
+    font-size: 28px;
+    line-height: 40px;
+    font-weight: 400;
+}
+.whatItem{
+    text-align: center;
+    font-size: 20px;
+    line-height: 30px;
+    display: block;
+    margin: 0 auto;
+}
+
+.searchResultMain .product_view{
+    width: 1050px;
+    height: 100%;
+    margin-top: 50px;
+    margin-bottom: 25px;
+    display: block;
+    overflow: hidden;
+    padding-left: 3px;
+}
+
+.searchResultMain .product_view .product_one {
+    width: 250px;
+    height: 400px;
+    /*border: 1px solid pink;*/
+    float: left;
+    margin: 25px 5px 30px 5px;
+}
+
+.searchResultMain .attr_choose{
+    font-weight: 500;
+}
+
+.searchResultMain .attr_type ul li{
+    cursor: pointer;
+}
+.searchResultMain .product_img{
+    width: 250px;
+    height: 250px;
+    /*border: 1px pink solid;*/
+    margin-bottom: 14px;
+    overflow: hidden;
+}
+.searchResultMain .product_img img{
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    transform: scale(1);
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transition: all 0.3s ease-in-out;
+}
+.searchResultMain .product_img img:hover {
+    transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    -o-transform: scale(1.1);
+}

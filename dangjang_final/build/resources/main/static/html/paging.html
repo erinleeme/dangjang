@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        /* paging ---------------------------------------------  */
+        .layout_paging{
+            font-size: 0;
+            margin: 60px 0 0;
+            text-align: center;
+        }
+        .layout_paging .pagingDiv a{
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 12px;
+        }
+        .layout_paging .pagingDiv .layout_paging_button{
+            display: inline-block;
+            width: 34px;
+            height: 34px;
+            border: 1px solid #CFD8DC;
+            border-left: 0;
+            vertical-align: top;
+        }
+
+        .layout_paging .pagingDiv .layout_paging_firstPage{
+            border-left: 1px solid #CFD8DC;
+            background-image: url(../icon/nextEnd_left.png);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: 50%;
+            text-indent: -9999px;
+        }
+
+        .layout_paging .pagingDiv .layout_paging_prevPage{
+            background-image: url(../icon/next_left.png);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: 28%;
+            text-indent: -9999px;
+        }
+
+        .layout_paging .pagingDiv .layout_paging_nextPage{
+            background-image: url(../icon/next_right.png);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: 28%;
+            text-indent: -9999px;
+        }
+
+        .layout_paging .pagingDiv .layout_paging_lastPage{
+            background-image: url(../icon/nextEnd_right.png);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: 50%;
+            text-indent: -9999px;
+        }
+
+        .layout_paging .pagingDiv .layout_paging_number{
+            line-height: 34px;
+            color: #1A237E;
+        }
+    </style>
+</head>
+<body>
+<div class="layout_paging">
+    <div class="pagingDiv">
+        <a class="layout_paging_button layout_paging_firstPage">맨 처음 페이지로 가기</a>
+        <a class="layout_paging_button layout_paging_prevPage">이전 페이지로 가기</a>
+        <a class="layout_paging_button layout_paging_number">1</a>
+        <a class="layout_paging_button layout_paging_number">2</a>
+        <a class="layout_paging_button layout_paging_number">3</a>
+        <a class="layout_paging_button layout_paging_number">4</a>
+        <a class="layout_paging_button layout_paging_number">5</a>
+        <a class="layout_paging_button layout_paging_number">6</a>
+        <a class="layout_paging_button layout_paging_number">7</a>
+        <a class="layout_paging_button layout_paging_number">8</a>
+        <a class="layout_paging_button layout_paging_number">9</a>
+        <a class="layout_paging_button layout_paging_number">10</a>
+        <a class="layout_paging_button layout_paging_nextPage">맨 처음 페이지로 가기</a>
+        <a class="layout_paging_button layout_paging_lastPage">맨 마지막 페이지로 가기</a>
+    </div>
+</div>
+</body>
+</html>

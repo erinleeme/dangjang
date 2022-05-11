@@ -1,0 +1,168 @@
+.bestArea{
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+.bestMain{
+    width: 1050px;
+    height: 100%;
+    margin: 0 auto;
+    /*border: 1px green solid;*/
+}
+
+.event_one img{
+    width: 1050px;
+    margin: 0 auto;
+    /*border: 1px yellow solid;*/
+    height: 300px;
+}
+.bestNav > ul{
+    overflow: hidden;
+    /*border: 1px solid #CFD8DC;*/
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 20px;
+    height: 60px;
+    background-color: #F50057;
+}
+
+.bestNav > ul > li {
+    position: relative;
+    height: 60px;
+    background-color: #F50057;
+    font-size: 20px;
+    line-height: 60px;
+}
+.bestNav > ul > li:after {
+    content: '';
+    position: absolute;
+    right: -120px;
+    top: 20px;
+    width: 1px;
+    height: 20px;
+    background-color: #CFD8DC;
+}
+.bestNav > ul > li:last-child:after {
+    display: none;
+}
+.bestNav > ul > li a{
+    display: block;
+    color: #FFFFFF;
+    opacity: 0.5;
+}
+.bestNav > ul > li a:hover{
+    display: block;
+    color: #FFFFFF;
+    opacity: 1;
+}
+
+.best_pro_Container{
+    margin-top: 100px;
+}
+
+/* product 4개 set */
+.best_review_set, .best_top_set, .best_md_set {
+    width: 1050px;
+    height: 600px;
+    /*border: 1px solid red;*/
+    margin-bottom: 200px;
+}
+
+.best_review_set * {
+    box-sizing: border-box;
+}
+
+.bestArea .product_set{
+    width: 1050px;
+    height: 560px;
+    margin: 0 auto;
+    /*border: 1px pink solid;*/
+    margin-top: 25px;
+    margin-bottom: 25px;
+    display: block;
+    position: relative;
+    overflow: hidden;
+}
+
+.bestArea .product_set h4{
+    color: #000000;
+    font-size: 28px;
+    line-height: 30px;
+    font-weight: 400;
+    margin-bottom: 10px;
+    text-align: center;
+    /*border: 1px green solid;*/
+}
+.bestArea .product_view{
+    margin-top: 50px;
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bestArea .product_one{
+    width: 250px;
+    height: 400px;
+    /*border: 1px pink solid;*/
+    margin-right: 15px;
+
+}
+.bestArea .product_img{
+    width: 250px;
+    height: 250px;
+    /*border: 1px pink solid;*/
+    margin-bottom: 14px;
+}
+
+.bestArea .product_img img{
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+}
+
+.bestArea .product_name{
+    font-size: 16px;
+    line-height: 25px;
+    font-weight: 300;
+    margin-bottom: 9px;
+}
+
+.bestArea .product_price{
+    font-size: 16px;
+    line-height: 18px;
+    font-weight: 600;
+    margin-bottom: 9px;
+}
+.bestArea .product_price span > b{
+    color: #F50057;
+}
+.bestArea .product_state{
+    margin-bottom: 9px;
+}
+
+.bestArea .product_state span{
+    background-color: #00ACC1;
+    color: #FFFFFF;
+    padding: 1px 6px;
+    border-radius: 5px;
+    vertical-align: middle;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.bestArea .product_reviewAndPick{
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 17px;
+}
+.bestArea .product_reviewAndPick img{
+    width: 18px;
+    height: 18px;
+    margin-right: 2px;
+}
+
+.bestArea .product_review{
+    margin-right: 7px;
+}
+/* ----------------------------------------------------- */

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        body{
+            display: flex;
+            flex-direction: column;
+        }
+
+
+        .ct_area{
+            border: rebeccapurple 1px solid;
+        }
+
+        .btn1{ 
+            border: 1px solid black;
+            border-radius: 2px;
+            width: 100px;
+            height: 33px;
+            padding: 6px;
+            margin: 6px;
+        }
+        .btn_pm{
+            width: 20px;
+            height: 20px;
+            padding: 4px;
+            margin: 4px;
+            /* border: 1px solid #CFD8DC;*/
+            border-radius: 2px;
+            background-size: cover;
+            display: flex;
+            text-align: center;
+            align-items: center;
+        }
+        .btn_minus{
+            background-image: url(../image/minus.png);
+        }
+        .btn_plus{
+            background-image: url(../image/plus.png);
+        }
+        #pd_quantity{
+            width: 20px;
+            background-color: white;
+            outline: none;
+            border: none;
+            display: inline-block;
+        }
+        .plus_minus{
+            border: 1px solid #CFD8DC;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: row;
+            width: fit-content;
+        }
+
+        /*버튼 모양 동일하게  갈예정... 임시 버튼 css ...구린거 나두알아!!!!!! ㅜ*/
+        .btn01{
+            display: inline-block;
+            padding: 5px 18px 8px;
+            margin: 5px;
+            font-size: 12pt;
+            border-radius: 24px;
+            background-color: #00ACC1;
+            line-height : 19px;
+            letter-spacing: -.2px;
+            white-space: nowrap;
+            color: white;           
+        }
+
+
+    </style>
+    
+</head>
+<body>
+    <button class="btn_cart btn1" type="button" >
+        장바구니
+    </button>
+
+    <section class="ct_area" id="pd_cart_time" >
+        <div class="ct_header">
+            <h3>옥수수맛있겠다(200g)</h3>
+            <span>3,000원(원가)</span>
+        </div>
+        <div class="ct_ctrl">
+            <div class="cost_ctrl">
+                <span class="after_cost">3,000<em>원</em></span>
+                <div class="plus_minus">
+                    <a class="btn_minus btn_pm"></a>
+                    <input type="text" value="1" id="pd_quantity" autocomplete="off" >
+                    <a class="btn_plus btn_pm"></a>
+                </div>                
+            </div>
+            <ul class="ct_result">
+                <li>
+                    <a href="javascript:void(0)" class="close btn01"> 닫기</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)" class="btn_cart btn01" onclick="fn_cartTemp()">장바구니</a>
+                </li>
+            </ul>
+
+        </div>
+
+    </section>
+<script>
+    
+    
+
+    //마이너스 버튼
+    $('#pd_cart_time .btn_minus').off('click').on('click', function(){
+        var qty = Number($("#pd_quantity").val());
+		if(qty > 1){
+		    $("#pd_quantity").val(qty-1);
+//		    prmParam.qty = qty-1;
+//		    getPromotionTxtAndPrc( obj, prmParam );
+		}
+	});
+    //플러스 버튼
+    $('#pd_cart_time .btn_plus').off('click').on('click', function(){
+        var qty = Number($("#pd_quantity").val());
+        var mx_qty = 100;
+		if(qty < mx_qty){
+		    $("#pd_quantity").val(qty+1);
+//		    prmParam.qty = qty-1;
+//		    getPromotionTxtAndPrc( obj, prmParam );
+		}
+	});
+    //마이너스 버튼
+    $('#pd_cart_time .btn_minus').off('click').on('click', function(){
+        var qty = Number($("#pd_quantity").val());
+		if(qty > 1){
+		    $("#pd_quantity").val(qty-1);
+//		    prmParam.qty = qty-1;
+//		    getPromotionTxtAndPrc( obj, prmParam );
+		}
+	});
+		    
+		    //플러스 버튼
+/*	$('.btn_plus').off('click').on('click', function(){
+		var qty = Number($("#tnOrdQty").val());
+                
+		var idx = $('#optnCompntItemList input[type=radio]:checked').closest('li').index();
+    	var stockPossQty = itemStockQty[idx];
+		    	
+		if ( stockPossQty != undefined && stockPossQty > 0 ) {
+		    chkStockQty = stockPossQty;
+		    }
+       	if ( chkStockQty <= qty ) {
+		            cfn_toastHtmlPop( "insOrdBasketPopErr", '최대 '+chkStockQty+' 개까지 구매 가능합니다.', '' );
+		    		
+		            $("#abovelayer_optnCompntItem #optnOrdQty").val( chkStockQty );
+		    		prmParam.qty = chkStockQty;
+		    	}else {
+		    		$("#abovelayer_optnCompntItem #optnOrdQty").val( qty+1 );
+		    		prmParam.qty = qty+1;
+		    	}
+		    	getPromotionTxtAndPrc( obj, prmParam );
+		    });
+		    
+		    //수량 input
+		    $("#pd_quantity").attr( 'autocomplete', 'off' );
+		    $("#pd_quantity").off('keyup').on( 'keyup', function() {
+		    	
+		    	var repVal = $(this).val().replace(/[^0-9]/g,'');
+				$( this ).val( repVal );
+				
+		    	var qty = Number( repVal );
+		    	var stockPossQty = itemStockQty[idx];
+		    	
+		    		chkStockQty = stockPossQty;
+		    	
+		    	
+		    	if ( chkStockQty <= qty ) {
+		            cfn_toastHtmlPop( "insOrdBasketPopErr", '최대 '+chkStockQty+' 개까지 구매 가능합니다.', '' );
+		    		$("#abovelayer_optnCompntItem #optnOrdQty").val( chkStockQty );
+		    		prmParam.qty = chkStockQty;
+		    	} else {
+		    		prmParam.qty = qty;
+		    	}
+		    	getPromotionTxtAndPrc( obj, prmParam );
+		    });
+	*/	    
+    
+    function fn_cartTemp(){
+        console.log("검증후 데이터 넘기기~");
+    }
+
+
+    var ord_quantity = $("").find('#pd_quantity').val();
+			
+    if(ord_quantity <= 0){
+        $("#alert_msg").html("수량을 선택해주세요.");
+    }else{
+        //주문상품코드, 주문수량, 
+//        ord_cart(optnItemCd, optnOrdQty, fstbuyYn, optnItemFlag, optn_flag, arrv_ymd, arrv_wday);
+
+        //창닫기 펑션 만들기
+ //       fn_closeBasketOptn();
+    }
+
+  
+</script>
+</body>
+</html>

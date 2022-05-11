@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>Document</title>
+    <style>
+        body{
+            width: 800px;
+            border: black solid 1px;
+        }
+        .container{
+            position: relative;
+            width: 1050px;
+        }
+        ul{
+            list-style:none;
+            }
+        .txt_caution{
+            font-size: small;
+            color: #F50057 ;
+        }
+        .btn_upload{
+            background-image: url(../image/upload01.png) ;
+            background-color: #CFD8DC  ;
+            background-size: contain;
+            border: #F50057 solid 1px;
+            border-radius: 2px;
+            width: 80px;
+            height: 80px;
+            padding: 4px;
+            margin: 4px;
+            
+            
+            display: flex;
+            text-align: center;
+            align-items: center;
+            color: transparent;
+        }
+        .img{
+            width: 80px;
+            height: 80px;
+            border: #F50057 solid 1px;
+        }
+        .btn_submit{
+            width: 100%;
+            height: 20px;
+
+        }
+        .up_list >ul{
+            display: flex;
+            flex-direction: row;
+            border: black 1px solid;
+        }
+    </style>
+</head>
+<body>
+
+<section class="container">
+    <article class="request_form">
+        <ul class="form_list">
+            <span>휴대전화 or 이메일 or 둘다?</span>
+            <li>
+                <h5 class="rf_tit">이메일</h5> 
+                <input type="email" id="email" class="rf_input" >
+                <a href="javascript:void(0);" class="">이메일 선택</a>
+                <div class="txt_caution">이메일을 입력해 주세요.</div>
+                <div class="txt_caution">이메일 형식에 맞게 입력해 주세요</div>
+            </li>
+            <li>
+                <h5 class="rf_tit">휴대전화</h5> 
+                <input type="tel" id="phone" class="rf_input" maxlength="11" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');">
+                <div class="txt_caution">휴대전화 번호를 입력해 주세요.</div>
+                <div class="txt_caution">'-'를 제외한 숫자만 입력해 주세요</div>
+            </li>
+            <li>
+                <h5 class="rf_tit">문의유형</h5> 
+                <select type="text" id="req_type" class="qf_input" onclick="javascript:typeCheck();" placeholder="문의 유형을 선택해 주세요.">
+                    <option>문의 유형을 선택해 주세요.</option>
+                    <option>*구매 관련 문의*</option>
+                    <option value="">배송문의</option>
+                    <option value="">주문문의</option>
+                    <option value="">취소문의</option>
+                    <option value="">반품문의</option>
+                    <option value="">교환문의</option>
+                    <option value="">환불문의</option>
+                    <option value="">사은품문의</option>
+                    <option value="">결제관련 문의</option>
+                    <option>문의 유형을 선택해 주세요.</option>
+                    <option>*일반 상담 문의*</option>
+                    <option value="">회원정보문의</option>
+                    <option value="">회원제도문의</option>
+                    <option value="">결제방법문의</option>
+                    <option value="">상품문의->상품문의는 따로있어서 뺄예정</option>
+                    <option value="">당첨문의</option>
+                    <option>*냉장고 문의*</option>
+                    <option value="">냉장고 생성 문의</option>
+                    <option value="">냉장고 공유 문의</option>
+                    <option value="">냉장고 삭제 문의</option>
+                    <option value="">냉장고 배송지 문의</option>
+                    <option value="">*기타 문의(시스템, 증빙서류 등)*</option>
+                </select>
+                <div class="txt_caution">문의에 해당하는 유형을 선택해 주세요.</div>
+            </li>
+            <li class="rf_order_num">
+                <h5 class="rf_tit">주문번호</h5> 
+                <input type="button" id="req_po_num" class="qf_po_input" placeholder="주문번호를 선택해 주세요.">
+                <div class="txt_caution">문의에 해당하는 유형을 선택해 주세요.</div>
+                <input type="" name="order_num" value="선택한 값에서 받아올 po_num">
+            </li>
+            <li>
+                <h5 class="rf_tit">문의제목</h5> 
+                <input type="text" id="q_title" class="q_title" placeholder="제목를 입력해 주세요.">
+                <div class="txt_caution">제목을 입력해 주세요.</div>
+           </li>
+            <li>
+                <h5 class="qf_tit">문의내용</h5> 
+                <textarea type="rf_txt" id="q_content" class="qf_txt_input" >
+                </textarea>
+                <div class="txt_caution">문의 내용을 입력해 주세요.</div>
+            </li>
+
+        </ul>
+    </article>
+    <article class="upload_area">
+        <h5 class="qf_tit">사진</h5>
+        <div class="up_list">
+            <ul>
+                <li>
+                    <a href="javascript:void(0);" class="btn_upload up_file" onclick="javascript:console.log(11);"></a>
+                    <input type="file" id="file" name="file" accept="image/*" >
+                </li>
+                <li class="list_img">
+                    <div class="img"></div>
+                </li>
+           </ul>
+        </div>
+        <div class="up_info">
+            <ul>
+                <li>
+                    <p>상품이상으로 교환 또는 환불이 필요하신 경우 사진 또는 동영상과 함께 구체적인 내용을 남겨주세요.</p>
+                </li>
+                <li>
+                    <p>이미지는 JPEG,JPG,PNG,GIF,AVI,MPG,MPEG,MPE,WMV,ASF,ASX,FLV,RM,MOV,MP4만 가능하며, 개수는 동영상을 포함해 5개, 업로드 용량은 최대 50MB까지 등록 가능합니다.</p>
+                </li>
+            </ul>
+        </div>
+    </article>
+    <article>
+        <button type="submit" class="btn_submit" id="1">등록</button>
+    </article>
+
+</section>
+<script>
+
+function typeCheck(){
+    console.log("유형선택");
+
+}
+
+</script>
+</body>
+</html>

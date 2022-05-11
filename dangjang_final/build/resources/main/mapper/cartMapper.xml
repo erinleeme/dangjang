@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dangjang.mapper.CartMapper">
+    <!--로그인 유저의 장바구니에 담긴 상품의 총 수량-->
+    <select id="getUserCartTotalCount" parameterType="long" resultType="int">
+        select count(*)
+        from cart
+        where seq_member = #{memId}
+    </select>
+    <!--해당 유저의 장바구니에 담긴 상품 정보-->
+    <select id="getUserCartList" parameterType="cart" resultType="product">
+        select * from product
+        where seq_product
+        in
+        <foreach collection="list" item="item" open="(" close=")" separator=",">
+            #{item.seq_product}
+        </foreach>
+        order by field(seq_product,
+        <foreach collection="list" item="item" separator=",">
+            #{item.seq_product}
+        </foreach>
+        )
+    </select>
+    <!--해당 유저의 장바구니 안 상품마다의 수-->
+    <select id="getCartProductCount" parameterType="long" resultType="cart">
+        select *
+        from cart
+        where seq_member = #{memId} group by seq_product
+    </select>
+    <!--Update 전 해당상품의 기존 수량-->
+    <select id="getProductCount" parameterType="java.util.Map" resultType="int">
+        select count
+        from cart
+        where seq_product = #{seq_product}
+          and seq_member = #{memId}
+    </select>
+    <!--해당상품 수량 Update-->
+    <update id="cartProductUpdate" parameterType="java.util.Map">
+        update cart
+        set
+        count = ${count}
+        where seq_product = #{seq_product} and seq_member = #{memId}
+    </update>
+    <!--장바구니에 처음 담을때-->
+    <insert id="productInsert" parameterType="java.util.Map">
+        insert into cart (count,
+                          create_date,
+                          seq_product,
+                          seq_member)
+        values (#{count},
+                now(),
+                #{seq_product},
+                #{memId})
+    </insert>
+    <!--선택 삭제-->
+    <delete id="productDelete" parameterType="java.util.Map">
+        delete
+        from cart
+        where seq_product = #{seq_product}
+          and seq_member = #{memId}
+    </delete>
+    <!--품절상품 일괄 삭제-->
+    <delete id="soldOutDelete" parameterType="java.util.Map">
+        delete
+        from cart
+        where seq_product in (
+            select seq_product
+            from (select * from sellCount where seq_product in (select seq_product from cart where seq_member = #{memId})) a
+            where inventory - selling_count = 0)
+          and seq_member = #{memId}
+    </delete>
+    <!--장바구니 상품 재고 수량 -->
+    <select id="getSellCountProduct" parameterType="long" resultType="sellCount">
+        select *
+        from sellCount s
+        where seq_product in (select seq_product from cart where seq_member = #{memId})
+    </select>
+
+    <insert id="productInsertList" parameterType="java.util.Map">
+        insert into cart (count, create_date, seq_product, seq_member)
+        values (1, now(), #{seq_product}, #{memId})
+    </insert>
+
+    <select id="getBuyCartProduct" parameterType="long" resultType="cart">
+        select * from cart where seq_member = #{memId}
+    </select>
+
+</mapper>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dangjang.mapper.CouponMapper">
+    <select id="getMemberCoupon" parameterType="long" resultType="memberCoupon">
+        select * from member_coupon where seq_member = #{memId} and coupon_status = '미사용'
+    </select>
+
+    <!--멤버 쿠폰  목록-->
+    <select id="getCouponMemberList" parameterType="java.util.List" resultType="couponS">
+        select seq_coupon, date_format(create_date, '%Y.%m.%d')as create_date,
+        date_format(update_date, '%Y.%m.%d')as update_date,
+        date_format(start_date, '%Y.%m.%d')as start_date,
+        date_format(end_date, '%Y.%m.%d')as end_date,
+        coupon_content, coupon_price, coupon_name, total_count, used_count,
+        datediff(date(end_date), now()) as dday
+        from coupon
+        where seq_coupon
+        in
+        <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+            #{item.seq_coupon}
+        </foreach>
+        order by field( seq_coupon,
+        <foreach collection="list" item="item" index="index" separator=",">
+            #{item.seq_coupon}
+        </foreach>
+        )
+    </select>
+
+    <insert id="wellcomCoupon" parameterType="java.util.Map">
+        insert into member_coupon (coupon_status, receive_date, seq_coupon, seq_member)
+        values (#{status}, now(), 1, #{memId})
+    </insert>
+
+
+</mapper>

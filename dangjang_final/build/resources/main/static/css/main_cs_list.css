@@ -1,0 +1,96 @@
+/* cs 공통 */
+#customerCenter_list{
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+#customerCenter_list *{
+    box-sizing: border-box;
+}
+
+#customerCenter_list_wrap{
+    width: 1050px;
+    height: 200px;
+    position: relative;
+    margin: 0 auto;
+    text-align: left;
+}
+
+#customerCenter_list .latestBoard{
+    position: relative;
+    float: left;
+}
+
+#customerCenter_list .latestBoard h3{
+    height: 45px;
+    line-height: 45px;
+    font-size: 16px;
+    border-bottom: 1px solid #1A237E;
+}
+
+#customerCenter_list .latestBoard a.more{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    line-height: 45px;
+    height: 45px;
+    font-size: 14px; 
+    color: #00ACC1;
+}
+
+#customerCenter_list .latestBoard ul{
+    padding: 10px 0px 0px 0px;
+}
+
+#customerCenter_list .latestBoard ul li{
+    display: table;
+    width: 100%;
+    font-size: 14px;
+    color: #828282;
+    line-height: 29px;
+}
+
+#customerCenter_list .latestBoard ul li a{
+    display: table-cell;
+    color: #828282;
+}
+
+#customerCenter_list .latestBoard ul li a span.cs-inner{
+    color: #828282;
+    height: 29px;
+    line-height: 29px;
+    white-space: normal;
+    word-wrap: break-word;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+#customerCenter_list .latestBoard ul li a span.cs-inner:hover{
+    color: #F50057;
+}
+
+#customerCenter_list .latestBoard ul li span.cs-date{
+    display: table-cell;
+    width: 90px;
+    text-align: right;
+}
+
+/* ----------------------------------------------------- */
+
+#customerCenter_list .latestBoard.boardNotice{
+    width: 500px;
+    /* border: 1px solid black; */
+    margin-left: 10px;
+}
+
+
+#customerCenter_list .latestBoard.boardFAQ{
+    width: 450px;
+    /* border: 1px solid black; */
+    margin-left: 50px;
+}
+
+

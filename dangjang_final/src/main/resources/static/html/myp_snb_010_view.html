@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <!--font-style link-->
+    <!--font-style link-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- <link rel="stylesheet" href="../css/content.css">
+    <link rel="stylesheet" href="../css/myp_snb_010.css"> -->
+
+  
+    <title>Document</title>
+    <style>/* tap */
+/* 탭 전체 스타일 */
+.tabs {
+    margin-top: 50px;
+    padding-bottom: 40px;
+    background-color: #ffffff;
+    width: 700px;
+    margin: 0 auto;}
+  
+  /* 탭 스타일 */
+  .tab_menu {
+    width: calc(100%/2);
+    height: 50px;
+    border-bottom: 2px solid #CFD8DC;
+    line-height: 50px;
+    font-size: 16px;
+    text-align: center;
+    color: #333333;
+    display: block;
+    float: left;
+    text-align: center;
+    font-weight: bold;
+    transition: all 0.2s ease;
+  }
+
+  .tab_menu:hover {
+    opacity: 0.75;
+    color: #F50057;
+  }
+  
+  /* 라디오 버튼 삭제*/
+  input[name="tab_item"] {
+    display: none;
+  }
+  
+  /* 탭 컨텐츠 스타일 */
+  .tab_content {
+    display: none;
+    padding: 40px 40px 0;
+    clear: both;
+    overflow: hidden;
+
+    width: 100%;
+    border: #F50057 1px solid;
+
+  }
+  /* 선택 된 탭 콘텐츠를 표시 */
+  #q_qna:checked ~ #qna_content,
+  #q_pd:checked ~ #pd_content{
+    display: block;
+  }
+  
+  /* 선택된 탭 스타일 */
+  .tabs input:checked + .tab_menu {
+    color: #00ACC1;
+    border-bottom: 2px solid #00ACC1 ;
+  }
+    </style>
+
+</head>
+<body>
+<article class="container"> 
+  <article class="tabs">
+<!-- menu 영역 -->
+    <input id="q_qna" type="radio" name="tab_item" checked>
+    <label class="tab_menu" for="q_qna">Tab 1</label>
+    <input id="q_pd" type="radio" name="tab_item">
+    <label class="tab_menu" for="q_pd">Tab 2</label>
+<!-- menu 영역 -->   
+      <section class="tab_content" id="qna_content">
+        <h5>문의하신 내역</h5>
+
+          <div class="qna_area">
+            <ul class="qna_list">
+              <li class="list" seqno="10"> <!-- <li class="list" seqno="2"> 태그에 넙버 넣기-->
+                <div class="div_open" title="상세내용">
+
+                  <div class="rep_yet">
+                    <div class="ico"></div>
+                    <span class="status_tg">답변대기</span>
+                  </div>
+                  <div class="info">
+                    <p class="date">2022-02-02</p>
+                    <p class="type_tg">배송관련</p>
+                    <p class="tit">보통 배송은 몇시쯤 오나요?</p>
+                  </div>
+                </div>
+                <div class="info_view" style="display: none;" >
+                    <div class="info_detail">
+                      <div class="od_num">
+                        <dl>
+                          <dt>주문번호</dt>
+                          <dd>1231231565</dd>
+                        </dl>    
+                      </div>
+                      <p class="q_content">질문내용 어쩌구저쩌구~!!</p>
+                      <ul class="q_btn">
+                        <li>
+                          <a href="/dangjangshop/html/myp_snb_010_submitForm.html">수정</a>
+                        </li>
+                          <a href="javascript:void(0);" onclick="javascript:qnaDel('delete','1','1')">삭제</a>
+                      </ul>
+                    </div>
+                </div>
+              </li>
+              <li class="list" seqno="9"> <!-- <li class="list" seqno="2"> 태그에 넙버 넣기-->
+                <div class="div_open" title="상세내용">
+
+                  <div class="rep_yet">
+                    <div class="ico"></div>
+                    <span class="status_tg">답변대기</span>
+                  </div>
+                  <div class="info">
+                    <p class="date">2022-02-02</p>
+                    <p class="type_tg">배송관련</p>
+                    <p class="tit">보통 배송은 몇시쯤 오나요?</p>
+                  </div>
+                </div>
+                <div class="info_view" style="display: none;" >
+                    <div class="info_detail">
+                      <div class="od_num">
+                        <dl>
+                          <dt>주문번호</dt>
+                          <dd>1231231565</dd>
+                        </dl>    
+                      </div>
+                      <p class="q_content">질문내용 어쩌구저쩌구~!!</p>
+                      <ul class="q_btn">
+                        <li>
+                          <a href="/dangjangshop/html/myp_snb_010_submitForm.html">수정</a>
+                        </li>
+                          <a href="javascript:void(0);" onclick="javascript:qnaDel('delete','1','1')">삭제</a>
+                      </ul>
+                    </div>
+                </div>
+              </li>
+              <li class="list" seqno="4"> <!-- <li class="list" seqno="2"> 태그에 넙버 넣기-->
+                <a class="div_open" title="상세내용">
+                  <div class="rep_yet">
+                    <div class="ico"></div>
+                    <span class="status_tg">답변대기</span>
+                  </div>
+                  <div class="info">
+                    <p class="date">2022-02-02</p>
+                    <p class="type_tg">배송관련</p>
+                    <p class="tit">보통 배송은 몇시쯤 오나요?</p>
+                  </div>
+                </a>
+                <div class="info_view" style="display: none;" >
+                    <div class="info_detail">
+                      <div class="od_num">
+                        <dl>
+                          <dt>주문번호</dt>
+                          <dd>1231231565</dd>
+                        </dl>    
+                      </div>
+                      <p class="q_content">질문내용 어쩌구저쩌구~!!</p>
+                      <ul class="q_btn">
+                        <li>
+                          <a href="/dangjangshop/html/myp_snb_010_submitForm.html">수정</a>
+                        </li>
+                          <a href="javascript:void(0);" onclick="javascript:qnaDel('delete','1','1')">삭제</a>
+                      </ul>
+                    </div>
+                </div>
+              </li>              
+            </ul>
+          </div>
+          <div class="paging"></div>
+      </section>
+
+      <section class="tab_content" id="pd_content">
+              https://velog.io/@henotony
+      </section>
+  </article>
+</article>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!--footerInfo c:Info_on Event-->
+<script type="text/javascript">
+    //더보기 js
+    const items = document.getElementsByClassName('div_open');
+    let clickEventCheck = 1;
+    // function clickInfo(event){
+    //   console.log(items.length);
+    //   console.log(items)
+    //     if(clickEventCheck == 1){
+    //         document.querySelector(".div_open").classList.add("info_on");
+    //         document.querySelector(".info_view").setAttribute("style", "display: block");
+    //         clickEventCheck = 0;   
+    //     } else {
+    //         document.querySelector(".div_open").classList.remove("info_on");
+    //         document.querySelector(".info_view").setAttribute("style", "display: none");
+    //         clickEventCheck = 1;
+    //     }
+    // }
+    //console.log(items)
+    $('.div_open').click(function(){
+      console.log($(this))
+      console.log($(this).next().css('display'))
+      if($(this).next().css('display') == 'none'){
+        $(this).next().attr('style', 'display: block');
+        clickEventCheck = 0;
+      } else {
+        $(this).next().attr('style', 'display: none');
+        clickEventCheck = 1;
+        
+      }
+    })
+
+    // const list = document.querySelector('.div_open');
+    // list.click(function(){
+    //   console.log(list.parent.prop('seqno'))
+    // })
+    
+</script> 
+
+
+<section class="popup alert_pop" id="popup_del_inquiry" style="display: block;">
+  <div class="what_wrap">
+    <div class="what_body">
+      <div>해당 1:1문의를 삭제하시겠습니까?</div>
+    </div>
+    <div class="what_footer">
+      <button href="javascript:void(0);" id="cancel" class="btn_type_90">
+      취소</button>
+      <button href="javascript:void(0);" id="confirm" class="btn_type_90">
+      삭제</button>
+    </div>
+
+  </div>
+
+</section>
+</body>
+</html>
